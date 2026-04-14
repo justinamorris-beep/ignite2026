@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ignite the Market 2026 — KW Arizona Living Realty</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f0f0f;
+  --bg2:#1a1a1a;
+  --bg3:#222;
+  --border:#2e2e2e;
+  --border2:#383838;
+  --text:#f0ece4;
+  --text2:#a09890;
+  --text3:#6b6460;
+  --brand:#BA7517;
+  --brand2:#D85A30;
+  --brand3:#993C1D;
+  --success-bg:rgba(15,110,86,0.15);
+  --success-text:#4ade80;
+  --success-border:rgba(15,110,86,0.4);
+  --warn-bg:rgba(239,159,39,0.12);
+  --warn-text:#EF9F27;
+  --warn-border:rgba(239,159,39,0.4);
+  --radius:10px;
+  --radius-sm:6px;
+}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;padding:1rem}
+.itm{max-width:920px;margin:0 auto}
+/* HERO */
+.hero{border-radius:var(--radius);overflow:hidden;padding:2rem 2rem 0;margin-bottom:1.25rem;background:linear-gradient(135deg,#BA7517 0%,#993C1D 55%,#4A1B0C 100%);position:relative}
+.hero-content{position:relative;z-index:2;padding-bottom:2rem}
+.hero-brand{margin-bottom:14px}
+.hero-brand-top{font-size:10px;font-weight:500;color:rgba(250,238,218,0.55);letter-spacing:.14em;text-transform:uppercase}
+.hero-brand-name{font-size:14px;font-weight:500;color:#FAEEDA;letter-spacing:.06em;text-transform:uppercase}
+.hero-title{font-size:30px;font-weight:500;color:#FAEEDA;letter-spacing:-.5px;line-height:1.15;margin-bottom:5px}
+.hero-subtitle{font-size:15px;font-weight:500;color:#FAC775;margin-bottom:8px}
+.hero-tagline{font-size:13px;color:rgba(250,238,218,.75);font-style:italic;margin-bottom:14px}
+.hero-dates{display:inline-flex;gap:8px;align-items:center;background:rgba(0,0,0,.28);border-radius:var(--radius-sm);padding:6px 14px;font-size:13px;color:#FAC775;font-weight:500}
+.flame-floor{position:relative;height:80px;margin:0 -2rem;overflow:hidden}
+.flame{position:absolute;bottom:0;border-radius:50% 50% 30% 30%;animation:flicker 1.8s ease-in-out infinite alternate;opacity:.5}
+@keyframes flicker{0%{transform:scaleY(1) skewX(-2deg)}100%{transform:scaleY(1.18) skewX(2deg)}}
+/* TABS */
+.tabs{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap}
+.tb{padding:8px 16px;border-radius:var(--radius-sm);border:.5px solid var(--border2);background:var(--bg2);color:var(--text2);font-size:14px;cursor:pointer;font-family:inherit;transition:all .12s}
+.tb:hover{background:var(--bg3);color:var(--text)}
+.tb.on{background:var(--brand3);border-color:var(--brand3);color:#FAEEDA;font-weight:500}
+.panel{display:none}.panel.on{display:block}
+/* SHARED */
+.sec{font-size:15px;font-weight:500;color:var(--text);margin-bottom:.85rem;padding-bottom:8px;border-bottom:.5px solid var(--border)}
+/* LEADERBOARD */
+.lb-bar-wrap{display:flex;gap:8px;margin-bottom:1rem;align-items:center;flex-wrap:wrap}
+.lb-sel{padding:6px 10px;border-radius:var(--radius-sm);border:.5px solid var(--border2);background:var(--bg2);color:var(--text);font-size:13px;font-family:inherit}
+.lbh{display:grid;grid-template-columns:44px 1fr 80px 80px;gap:8px;padding:5px 12px;font-size:11px;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+.lbr{display:grid;grid-template-columns:44px 1fr 80px 80px;gap:8px;align-items:center;padding:10px 12px;border-radius:var(--radius-sm);margin-bottom:5px;background:var(--bg2);border:.5px solid var(--border)}
+.lbr:hover{background:var(--bg3)}
+.lbr-rank{text-align:center;font-size:16px}
+.lbr-name{font-size:14px;color:var(--text)}
+.lbr-mo{font-size:11px;color:var(--text3);text-align:right}
+.lbr-tot{font-size:15px;font-weight:500;color:var(--brand);text-align:right}
+.lbr-prog{grid-column:1/-1;height:3px;background:var(--border2);border-radius:2px;margin-top:-4px}
+.lbr-fill{height:3px;background:var(--brand2);border-radius:2px;transition:width .5s}
+.lb-empty{padding:2rem;text-align:center;color:var(--text2);font-size:14px}
+/* ADMIN */
+.admin-toggle{display:flex;align-items:center;gap:8px;margin-bottom:1rem;padding:8px 12px;background:rgba(153,60,29,0.08);border:.5px solid rgba(153,60,29,0.25);border-radius:var(--radius-sm);cursor:pointer;font-size:13px;color:var(--text2);font-family:inherit;width:100%;text-align:left}
+.admin-toggle input{accent-color:var(--brand3);width:14px;height:14px;cursor:pointer}
+.admin-panel{display:none}
+.admin-panel.show{display:block}
+.admin-note{font-size:12px;color:var(--text2);font-style:italic;padding:8px 12px;background:var(--bg3);border-radius:var(--radius-sm);margin-bottom:1rem}
+.admin-section{margin-bottom:1.25rem}
+.admin-title{font-size:12px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.admin-row{display:flex;justify-content:space-between;align-items:center;padding:7px 12px;border-radius:var(--radius-sm);background:var(--bg2);border:.5px solid var(--border);margin-bottom:4px;font-size:13px}
+.admin-row-name{color:var(--text)}
+.admin-row-pts{font-weight:500;color:var(--brand)}
+/* RULES */
+.rules-intro{background:var(--bg2);border-radius:var(--radius-sm);padding:.85rem 1rem;font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:1.25rem}
+.rules-list{list-style:none;margin-bottom:1rem}
+.rules-list li{display:flex;gap:8px;padding:7px 0;border-bottom:.5px solid var(--border);font-size:14px;color:var(--text)}
+.rules-list li:last-child{border:none}
+.rn{font-weight:500;color:var(--brand2);min-width:22px}
+/* POINTS */
+.pts-section{margin-bottom:1.75rem}
+.pts-section-title{font-size:13px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.pts-card{background:var(--bg2);border:.5px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:10px}
+.pts-base-row{display:flex;align-items:stretch}
+.pts-base-info{flex:1;padding:.75rem 1rem}
+.pts-base-name{font-size:14px;font-weight:500;color:var(--text);margin-bottom:3px}
+.pts-base-desc{font-size:12px;color:var(--text2);line-height:1.5}
+.pts-base-val{display:flex;align-items:center;justify-content:center;min-width:64px;background:rgba(186,117,23,0.1);border-left:.5px solid var(--border);font-size:20px;font-weight:500;color:var(--brand);padding:0 1rem}
+.pts-bonuses{border-top:.5px solid var(--border);background:var(--bg3)}
+.pts-bonus-label{font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;padding:6px 1rem 4px}
+.pts-bonus-row{display:flex;justify-content:space-between;align-items:center;padding:5px 1rem;border-top:.5px solid var(--border)}
+.pts-bonus-row:first-of-type{border-top:none}
+.pts-bonus-name{font-size:13px;color:var(--text)}
+.pts-bonus-val{font-size:13px;font-weight:500;color:#4ade80;white-space:nowrap}
+.spark-table{width:100%;border-collapse:collapse;font-size:13px}
+.spark-table th{text-align:left;font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;padding:6px 12px;border-bottom:.5px solid var(--border)}
+.spark-table th:last-child{text-align:right}
+.spark-table td{padding:10px 12px;border-bottom:.5px solid var(--border);vertical-align:top}
+.spark-table tr:last-child td{border-bottom:none}
+.spark-table tr:hover td{background:var(--bg3)}
+.spark-name{font-weight:500;color:var(--text)}
+.spark-desc{font-size:12px;color:var(--text2);margin-top:2px}
+.spark-pts{text-align:right;font-size:15px;font-weight:500;color:var(--brand);white-space:nowrap;vertical-align:middle}
+.spark-badge{display:inline-block;font-size:10px;font-weight:500;padding:2px 7px;border-radius:20px;margin-left:6px;vertical-align:middle}
+.badge-5{background:rgba(186,117,23,0.15);color:var(--brand)}
+.badge-3{background:var(--bg3);color:var(--text2)}
+.pts-note{background:rgba(186,117,23,0.08);border:.5px solid rgba(186,117,23,0.25);border-radius:var(--radius-sm);padding:.75rem 1rem;font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:1.5rem}
+/* PRIZES */
+.prize-section{margin-bottom:1.75rem}
+.ma-stack,.gp-stack{display:block;margin-bottom:.75rem}
+.ma-row,.gp-row{display:flex;align-items:center;gap:16px;border-radius:var(--radius);border:.5px solid var(--border);background:var(--bg2);padding:1rem 1.25rem;margin-bottom:10px;width:100%}
+.ma-row:last-child,.gp-row:last-child{margin-bottom:0}
+.ma-row.spark{border-color:#EF9F27}.ma-row.solar{border-color:#1D9E75}.ma-row.flame{border-color:#D85A30}
+.gp-row.g1{border-color:#EF9F27}.gp-row.g2{border-color:#B4B2A9}.gp-row.g3{border-color:#D85A30}
+.ma-ico,.gp-medal{font-size:28px;flex-shrink:0;line-height:1;width:36px}
+.ma-body,.gp-body{flex:1}
+.ma-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:2px}
+.ma-criteria{font-size:12px;color:var(--text2)}
+.gp-place{font-size:11px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+.gp-desc{font-size:12px;color:var(--text2)}
+.ma-pill,.gp-value{font-size:12px;font-weight:500;padding:4px 14px;border-radius:20px;flex-shrink:0;white-space:nowrap}
+.ma-pill.spark{background:rgba(239,159,39,0.15);color:#BA7517}
+.ma-pill.solar{background:rgba(29,158,117,0.12);color:#4ade80}
+.ma-pill.flame{background:rgba(216,90,48,0.12);color:#D85A30}
+.gp-value{background:rgba(186,117,23,0.12);color:var(--brand)}
+.weekly-card{border-radius:var(--radius);border:2px solid var(--brand2);background:var(--bg2);overflow:hidden;margin-bottom:.5rem}
+.weekly-card-header{background:linear-gradient(135deg,#BA7517 0%,#993C1D 100%);padding:1rem 1.25rem;display:flex;align-items:center;gap:12px}
+.weekly-card-ico{font-size:36px;line-height:1}
+.weekly-card-title{font-size:18px;font-weight:500;color:#FAEEDA}
+.weekly-card-sub{font-size:12px;color:rgba(250,238,218,.7);margin-top:2px}
+.weekly-card-body{padding:1rem 1.25rem}
+.weekly-card-desc{font-size:14px;color:var(--text);line-height:1.6}
+.weekly-card-desc strong{color:var(--brand2)}
+/* SUBMIT */
+.fg{margin-bottom:.9rem}
+.fl{font-size:13px;color:var(--text2);display:block;margin-bottom:4px}
+.fi{width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:.5px solid var(--border2);background:var(--bg2);color:var(--text);font-size:14px;font-family:inherit}
+.fi:focus{outline:none;border-color:var(--brand)}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:.9rem}
+.act-section-label{font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;padding:8px 0 4px;grid-column:1/-1}
+.act-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.ac{display:flex;align-items:center;gap:7px;background:var(--bg2);border-radius:var(--radius-sm);padding:8px 10px;cursor:pointer;border:.5px solid transparent}
+.ac:hover{border-color:var(--border2)}
+.ac input{accent-color:var(--brand);width:14px;height:14px;cursor:pointer}
+.ac-lbl{font-size:12px;color:var(--text);cursor:pointer;flex:1;line-height:1.4}
+.ac-pt{font-size:11px;color:var(--brand);font-weight:500;white-space:nowrap}
+.pts-prev{background:var(--bg2);border-radius:var(--radius-sm);padding:10px 14px;display:flex;justify-content:space-between;align-items:center;margin:.9rem 0}
+.pts-prev span:first-child{font-size:13px;color:var(--text2)}
+.pts-prev span:last-child{font-size:20px;font-weight:500;color:var(--brand)}
+.sub-btn{padding:10px 28px;background:var(--brand3);color:#FAEEDA;border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:500;cursor:pointer;font-family:inherit}
+.sub-btn:hover{background:#BA4A23}
+.sub-btn:disabled{opacity:.5;cursor:not-allowed}
+.toast{display:none;padding:10px 14px;border-radius:var(--radius-sm);font-size:13px;margin-top:.75rem}
+.toast.ok{display:block;background:var(--success-bg);color:var(--success-text);border:.5px solid var(--success-border)}
+.toast.warn{display:block;background:var(--warn-bg);color:var(--warn-text);border:.5px solid var(--warn-border)}
+.dup-warn{display:none;background:var(--warn-bg);border:.5px solid var(--warn-border);border-radius:var(--radius-sm);padding:10px 14px;font-size:13px;color:var(--warn-text);margin-bottom:.9rem;line-height:1.5}
+.dup-warn.show{display:block}
+.hist-box{border:.5px solid var(--border2);border-radius:var(--radius-sm);overflow:hidden;margin-bottom:1rem}
+.hist-head{background:rgba(153,60,29,.1);padding:8px 12px;font-size:12px;font-weight:500;color:var(--brand2);display:flex;justify-content:space-between;align-items:center}
+.hist-row{display:grid;grid-template-columns:90px 70px 1fr 52px;gap:8px;padding:8px 12px;border-top:.5px solid var(--border);align-items:start}
+.hist-date{font-size:12px;color:var(--text2);white-space:nowrap}
+.hist-week{font-size:12px;color:var(--brand);font-weight:500;white-space:nowrap}
+.hist-acts{font-size:12px;color:var(--text);line-height:1.5}
+.hist-pts{font-size:13px;font-weight:500;color:var(--brand);white-space:nowrap;text-align:right}
+.hist-none{padding:10px 12px;font-size:13px;color:var(--text2);font-style:italic}
+.loading{padding:1.5rem;text-align:center;color:var(--text2);font-size:13px}
+@media(max-width:600px){.fg3{grid-template-columns:1fr 1fr}.pts-base-row{flex-direction:column}.pts-base-val{border-left:none;border-top:.5px solid var(--border);min-width:unset;padding:.5rem 1rem}}
+@media(max-width:480px){.fg3{grid-template-columns:1fr}.act-grid{grid-template-columns:1fr}.lbh,.lbr{grid-template-columns:36px 1fr 60px 60px}.hero-title{font-size:22px}}
+</style>
+</head>
+<body>
+<div class="itm">
+
+<div class="hero" role="banner">
+  <div class="hero-content">
+    <div class="hero-brand">
+      <div class="hero-brand-top">Keller Williams®</div>
+      <div class="hero-brand-name">Arizona Living Realty</div>
+    </div>
+    <div class="hero-title">🔥 Ignite the Market Competition</div>
+    <div class="hero-subtitle">Quest for top market share in 2026</div>
+    <div class="hero-tagline">"Who's bringing the heat this summer?"</div>
+    <div class="hero-dates">📅 May 1 – July 31, 2026 &nbsp;·&nbsp; Submit points weekly</div>
+  </div>
+  <div class="flame-floor" id="ff"></div>
+</div>
+
+<nav class="tabs" role="tablist">
+  <button class="tb on" onclick="showTab('lb',this)">🌡️ Heat Index</button>
+  <button class="tb" onclick="showTab('rules',this)">📖 Rules</button>
+  <button class="tb" onclick="showTab('pts',this)">💯 Points</button>
+  <button class="tb" onclick="showTab('prizes',this)">🏆 Prizes</button>
+  <button class="tb" onclick="showTab('sub',this)">🔥 Submit</button>
+</nav>
+
+<!-- HEAT INDEX -->
+<div id="tab-lb" class="panel on">
+  <div class="lb-bar-wrap">
+    <select class="lb-sel" id="lb-filter" onchange="renderLB()">
+      <option value="overall">Overall — all season</option>
+      <option value="May">May</option>
+      <option value="June">June</option>
+      <option value="July">July</option>
+      <optgroup label="── Weekly leaders ──">
+        <option value="wk-May 1–7">Week: May 1–7</option>
+        <option value="wk-May 8–14">Week: May 8–14</option>
+        <option value="wk-May 15–21">Week: May 15–21</option>
+        <option value="wk-May 22–28">Week: May 22–28</option>
+        <option value="wk-May 29–31">Week: May 29–31</option>
+        <option value="wk-Jun 1–7">Week: Jun 1–7</option>
+        <option value="wk-Jun 8–14">Week: Jun 8–14</option>
+        <option value="wk-Jun 15–21">Week: Jun 15–21</option>
+        <option value="wk-Jun 22–28">Week: Jun 22–28</option>
+        <option value="wk-Jun 29–30">Week: Jun 29–30</option>
+        <option value="wk-Jul 1–7">Week: Jul 1–7</option>
+        <option value="wk-Jul 8–14">Week: Jul 8–14</option>
+        <option value="wk-Jul 15–21">Week: Jul 15–21</option>
+        <option value="wk-Jul 22–28">Week: Jul 22–28</option>
+        <option value="wk-Jul 29–31">Week: Jul 29–31</option>
+      </optgroup>
+    </select>
+    <span style="font-size:12px;color:var(--text2)">Live leaderboard · use weekly filter for 🚒 firetruck winner</span>
+  </div>
+  <button class="admin-toggle" onclick="toggleAdmin()">
+    <input type="checkbox" id="admin-chk" onclick="event.stopPropagation()"> Show category breakdown (admin — monthly award winners)
+  </button>
+  <div class="admin-panel" id="admin-panel">
+    <div class="admin-note">Admin view — top agents by category points for the selected period. Use to determine monthly award winners.</div>
+    <div id="admin-content"></div>
+  </div>
+  <div class="lbh"><span>#</span><span>Agent</span><span style="text-align:right">Period</span><span style="text-align:right">Total</span></div>
+  <div id="lb-list"><div class="loading">Loading leaderboard...</div></div>
+</div>
+
+<!-- RULES -->
+<div id="tab-rules" class="panel">
+  <div class="rules-intro">The Ignite the Market Competition is a performance-based challenge designed to reward proactive activities, consistent effort, and outstanding results across all real estate activities. Participants earn points each week, submit them weekly, and compete for top honors and prizes in the quest to take back top market share in 2026.</div>
+  <p class="sec">How it works</p>
+  <ul class="rules-list">
+    <li><span class="rn">1.</span>Perform approved real estate activities throughout the week to earn points.</li>
+    <li><span class="rn">2.</span>Submit your activities once per week using the Submit tab — select the week you are reporting for.</li>
+    <li><span class="rn">3.</span>One submission per agent per week. Your submission history loads automatically when you enter your name.</li>
+    <li><span class="rn">4.</span>If you forgot to submit a prior week, you may still submit for that week — select the correct week from the dropdown.</li>
+    <li><span class="rn">5.</span>Points tally continuously across all weeks — watch your rank rise on the Heat Index.</li>
+    <li><span class="rn">6.</span>The top point earner each week gets to drive the remote-controlled firetruck around the office!</li>
+    <li><span class="rn">7.</span>Monthly category awards for each month will be presented at the following Team Meeting.</li>
+    <li><span class="rn">8.</span>Overall top 3 grand prizes announced and awarded at the Team Meeting on <strong>August 11, 2026</strong>.</li>
+  </ul>
+  <p style="font-size:13px;color:var(--text2)">All submissions are on the honor system. Management may verify activity documentation upon request.</p>
+</div>
+
+<!-- POINTS -->
+<div id="tab-pts" class="panel">
+  <p class="sec">How points work</p>
+  <div class="pts-note">Each base activity earns a set number of points. For Listing and Buyer agreements, you can also earn <strong>+5 bonus points</strong> based on how that lead was sourced.</div>
+  <div class="pts-section">
+    <div class="pts-section-title">🏠 Listing category</div>
+    <div class="pts-card">
+      <div class="pts-base-row">
+        <div class="pts-base-info"><div class="pts-base-name">Executed Exclusive Listing Agreement</div><div class="pts-base-desc">Signed and executed exclusive employment agreement with a seller</div></div>
+        <div class="pts-base-val">10 pts</div>
+      </div>
+      <div class="pts-bonuses">
+        <div class="pts-bonus-label">+5 bonus if lead came from:</div>
+        <div class="pts-bonus-row"><span class="pts-bonus-name">Unrepresented seller / FSBO</span><span class="pts-bonus-val">+5 pts</span></div>
+        <div class="pts-bonus-row"><span class="pts-bonus-name">Expired or cancelled listing</span><span class="pts-bonus-val">+5 pts</span></div>
+        <div class="pts-bonus-row"><span class="pts-bonus-name">Farming / geographic prospecting</span><span class="pts-bonus-val">+5 pts</span></div>
+        <div class="pts-bonus-row"><span class="pts-bonus-name">Referral</span><span class="pts-bonus-val">+5 pts</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pts-section">
+    <div class="pts-section-title">👥 Buyer category</div>
+    <div class="pts-card">
+      <div class="pts-base-row">
+        <div class="pts-base-info"><div class="pts-base-name">Executed Buyer-Broker Exclusive Employment Agreement</div><div class="pts-base-desc">Signed and executed exclusive buyer-broker agreement</div></div>
+        <div class="pts-base-val">10 pts</div>
+      </div>
+      <div class="pts-bonuses">
+        <div class="pts-bonus-label">+5 bonus if buyer came from:</div>
+        <div class="pts-bonus-row"><span class="pts-bonus-name">Unrepresented / walk-in buyer</span><span class="pts-bonus-val">+5 pts</span></div>
+        <div class="pts-bonus-row"><span class="pts-bonus-name">Open house</span><span class="pts-bonus-val">+5 pts</span></div>
+        <div class="pts-bonus-row"><span class="pts-bonus-name">Farming / geographic prospecting</span><span class="pts-bonus-val">+5 pts</span></div>
+        <div class="pts-bonus-row"><span class="pts-bonus-name">Referral</span><span class="pts-bonus-val">+5 pts</span></div>
+      </div>
+    </div>
+    <div class="pts-card">
+      <div class="pts-base-row">
+        <div class="pts-base-info"><div class="pts-base-name">Executed Buyer-Broker To-Show Agreement</div><div class="pts-base-desc">Signed to-show agreement before showing properties</div></div>
+        <div class="pts-base-val">5 pts</div>
+      </div>
+    </div>
+  </div>
+  <div class="pts-section">
+    <div class="pts-section-title">⚡ Spark actions</div>
+    <div class="pts-card">
+      <table class="spark-table">
+        <thead><tr><th>Activity</th><th>Pts</th></tr></thead>
+        <tbody>
+          <tr><td><div class="spark-name">Appointment Held <span class="spark-badge badge-5">5 pts</span></div><div class="spark-desc">In-person or virtual presentation</div></td><td class="spark-pts">5</td></tr>
+          <tr><td><div class="spark-name">Targeted Digital Marketing Campaign <span class="spark-badge badge-5">5 pts</span></div><div class="spark-desc">Ads or email blasts</div></td><td class="spark-pts">5</td></tr>
+          <tr><td><div class="spark-name">Host Open House / Broker Open <span class="spark-badge badge-5">5 pts</span></div><div class="spark-desc">Advertised and promoted on social media and IDX</div></td><td class="spark-pts">5</td></tr>
+          <tr><td><div class="spark-name">Posting a Video on Social Media <span class="spark-badge badge-3">3 pts</span></div><div class="spark-desc">One video across any platform</div></td><td class="spark-pts">3</td></tr>
+          <tr><td><div class="spark-name">Attend a Market Center Event / Class / Training <span class="spark-badge badge-3">3 pts</span></div><div class="spark-desc">Any office</div></td><td class="spark-pts">3</td></tr>
+          <tr><td><div class="spark-name">Activate a Smart Plan <span class="spark-badge badge-3">3 pts</span></div><div class="spark-desc">Automated follow-up tasks</div></td><td class="spark-pts">3</td></tr>
+          <tr><td><div class="spark-name">Floor Time <span class="spark-badge badge-3">3 pts</span></div><div class="spark-desc">Per slot sign up</div></td><td class="spark-pts">3</td></tr>
+          <tr><td><div class="spark-name">Circle Prospecting <span class="spark-badge badge-3">3 pts</span></div><div class="spark-desc">Targeted client base</div></td><td class="spark-pts">3</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- PRIZES -->
+<div id="tab-prizes" class="panel">
+  <div id="prizes-content"></div>
+</div>
+
+<!-- SUBMIT -->
+<div id="tab-sub" class="panel">
+  <p class="sec">Submit your weekly activities</p>
+  <div class="fg3">
+    <div class="fg"><label class="fl" for="ag-name">Your name</label><input class="fi" id="ag-name" type="text" placeholder="Full name" autocomplete="off" oninput="onCtx()"/></div>
+    <div class="fg"><label class="fl" for="ag-month">Month</label><select class="fi" id="ag-month" onchange="onMonthChange()"><option value="">Select month...</option><option value="May">May</option><option value="June">June</option><option value="July">July</option></select></div>
+    <div class="fg"><label class="fl" for="ag-week">Week</label><select class="fi" id="ag-week" onchange="onCtx()" disabled><option value="">Select month first...</option></select></div>
+  </div>
+  <div class="dup-warn" id="dup-warn"></div>
+  <div id="history-area"></div>
+  <p class="fl" style="margin:0 0 6px">Select every activity completed this week — include bonus sources where applicable</p>
+  <div class="act-grid" id="act-grid"></div>
+  <div class="pts-prev"><span>Points this submission</span><span id="pts-now">0 pts</span></div>
+  <button class="sub-btn" id="sub-btn" onclick="doSubmit()">Submit points</button>
+  <div class="toast" id="toast"></div>
+</div>
+
+</div><!-- .itm -->
+
+<script>
+// ── Supabase config ──────────────────────────────────────────
+const SB_URL = 'https://viekqcmtoxweerxonbor.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZpZWtxY210b3h3ZWVyeG9uYm9yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxMDQ2MTEsImV4cCI6MjA5MTY4MDYxMX0.fvG7d4l5jYRbnrclR7n9YD43QHWfYrzA-RcIinc4BrA';
+
+async function sbFetch(path, opts={}){
+  const res = await fetch(`${SB_URL}/rest/v1/${path}`, {
+    headers: {
+      'apikey': SB_KEY,
+      'Authorization': `Bearer ${SB_KEY}`,
+      'Content-Type': 'application/json',
+      'Prefer': opts.prefer || 'return=minimal',
+      ...opts.headers
+    },
+    ...opts
+  });
+  if(!res.ok){ const e=await res.text(); throw new Error(e); }
+  const ct = res.headers.get('content-type')||'';
+  return ct.includes('json') ? res.json() : null;
+}
+
+async function loadSubs(){
+  return sbFetch('submissions?select=*&order=created_at.asc');
+}
+
+async function insertSub(row){
+  return sbFetch('submissions', {
+    method:'POST',
+    prefer:'return=minimal',
+    body: JSON.stringify(row)
+  });
+}
+
+// ── Activity definitions ──────────────────────────────────────
+const WEEKS={May:["May 1–7","May 8–14","May 15–21","May 22–28","May 29–31"],June:["Jun 1–7","Jun 8–14","Jun 15–21","Jun 22–28","Jun 29–30"],July:["Jul 1–7","Jul 8–14","Jul 15–21","Jul 22–28","Jul 29–31"]};
+const LA=[{key:"ls",label:"Executed Exclusive Listing Agreement",pts:10,cat:'L'},{key:"lu",label:"Listing bonus — unrepresented seller / FSBO (+5)",pts:5,cat:'L'},{key:"le",label:"Listing bonus — expired / cancelled listing (+5)",pts:5,cat:'L'},{key:"lf",label:"Listing bonus — farming / prospecting (+5)",pts:5,cat:'L'},{key:"lr",label:"Listing bonus — referral (+5)",pts:5,cat:'L'}];
+const BA=[{key:"be",label:"Executed Buyer-Broker Exclusive Agreement",pts:10,cat:'B'},{key:"bts",label:"Executed Buyer-Broker To-Show Agreement",pts:5,cat:'B'},{key:"bu",label:"Buyer bonus — unrepresented / walk-in (+5)",pts:5,cat:'B'},{key:"boh",label:"Buyer bonus — open house (+5)",pts:5,cat:'B'},{key:"bf",label:"Buyer bonus — farming / prospecting (+5)",pts:5,cat:'B'},{key:"br",label:"Buyer bonus — referral (+5)",pts:5,cat:'B'}];
+const SA=[{key:"ah",label:"Appointment held (in-person or virtual)",pts:5,cat:'S'},{key:"dm",label:"Targeted digital marketing campaign (ads/email blasts)",pts:5,cat:'S'},{key:"oh",label:"Host open house / broker open (advertised on social + IDX)",pts:5,cat:'S'},{key:"sv",label:"Posting a video on social media (one, any platform)",pts:3,cat:'S'},{key:"mc",label:"Attend a Market Center event / class / training",pts:3,cat:'S'},{key:"sp",label:"Activate a Smart Plan (automated follow-up)",pts:3,cat:'S'},{key:"ft",label:"Floor time (per slot sign up)",pts:3,cat:'S'},{key:"cp",label:"Circle prospecting (targeted client base)",pts:3,cat:'S'}];
+const ALL=[...LA,...BA,...SA];
+
+// ── In-memory cache of all submissions ───────────────────────
+let SUBS = [];
+
+async function refreshSubs(){
+  try{ SUBS = await loadSubs(); }
+  catch(e){ console.error('Could not load submissions', e); }
+}
+
+// ── Prizes tab (built in JS) ──────────────────────────────────
+function buildPrizes(){
+  const el=document.getElementById('prizes-content');
+  el.innerHTML=`
+  <div class="prize-section">
+    <p class="sec">🚒 Weekly award — every week</p>
+    <div class="weekly-card">
+      <div class="weekly-card-header">
+        <span class="weekly-card-ico">🚒</span>
+        <div><div class="weekly-card-title">Top of the Week</div><div class="weekly-card-sub">Awarded to the highest point earner each week</div></div>
+      </div>
+      <div class="weekly-card-body">
+        <div class="weekly-card-desc">The agent with the <strong>most points for the week</strong> earns the ultimate office bragging rights — they get to drive the <strong>remote-controlled firetruck around the office</strong>. Use the weekly filter on the Heat Index to see who's on top!</div>
+      </div>
+    </div>
+  </div>
+  <div class="prize-section">
+    <p class="sec">🎉 Monthly awards — presented at the following Team Meeting</p>
+    <div class="ma-stack" id="ma-stack"></div>
+    <p style="font-size:12px;color:var(--text2)">Prize revealed and presented at the following month's Team Meeting. 🎁</p>
+  </div>
+  <div class="prize-section">
+    <p class="sec">🏆 Overall grand prizes — announced August 11, 2026</p>
+    <div class="gp-stack" id="gp-stack"></div>
+    <p style="font-size:12px;color:var(--text2);margin-top:.5rem">Winners announced and prizes awarded at the Team Meeting on August 11, 2026. 🎁</p>
+  </div>`;
+
+  [
+    {cls:'spark',ico:'⚡',title:'Firestarter Award',criteria:'Most Spark Action points that month',pill:'spark',val:'$40 value'},
+    {cls:'solar',ico:'☀️',title:'Solar Flare Award',criteria:'Most Buyer category points that month',pill:'solar',val:'$50 value'},
+    {cls:'flame',ico:'🔥',title:'Burning Flame Award',criteria:'Most Listing category points that month',pill:'flame',val:'$70 value'},
+  ].forEach(d=>{
+    const r=document.createElement('div');r.className=`ma-row ${d.cls}`;
+    r.innerHTML=`<span class="ma-ico">${d.ico}</span><div class="ma-body"><div class="ma-title">${d.title}</div><div class="ma-criteria">${d.criteria}</div></div><span class="ma-pill ${d.pill}">${d.val}</span>`;
+    document.getElementById('ma-stack').appendChild(r);
+  });
+
+  [
+    {cls:'g1',medal:'🥇',place:'1st place',val:'$1,000 value',desc:'Highest overall points — May through July'},
+    {cls:'g2',medal:'🥈',place:'2nd place',val:'$500 value',desc:'Second highest overall points'},
+    {cls:'g3',medal:'🥉',place:'3rd place',val:'$250 value',desc:'Third highest overall points'},
+  ].forEach(d=>{
+    const r=document.createElement('div');r.className=`gp-row ${d.cls}`;
+    r.innerHTML=`<span class="gp-medal">${d.medal}</span><div class="gp-body"><div class="gp-place">${d.place}</div><div class="gp-desc">${d.desc}</div></div><span class="gp-value">${d.val}</span>`;
+    document.getElementById('gp-stack').appendChild(r);
+  });
+}
+
+// ── Tabs ──────────────────────────────────────────────────────
+function showTab(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('tab-'+id).classList.add('on');
+  btn.classList.add('on');
+  if(id==='lb') renderLB();
+}
+
+// ── Admin view ────────────────────────────────────────────────
+function toggleAdmin(){
+  const chk=document.getElementById('admin-chk');
+  chk.checked=!chk.checked;
+  document.getElementById('admin-panel').className=chk.checked?'admin-panel show':'admin-panel';
+  if(chk.checked) renderAdmin();
+}
+
+function getF(){ return document.getElementById('lb-filter').value; }
+
+function getRelSubs(f){
+  if(f.startsWith('wk-')){ const wk=f.slice(3); return SUBS.filter(s=>s.week===wk); }
+  if(f==='overall') return SUBS;
+  return SUBS.filter(s=>s.month===f);
+}
+
+function renderAdmin(){
+  const f=getF(), rel=getRelSubs(f);
+  const cats={
+    L:{label:'🔥 Burning Flame — Listing category',totals:{}},
+    B:{label:'☀️ Solar Flare — Buyer category',totals:{}},
+    S:{label:'⚡ Firestarter — Spark actions',totals:{}}
+  };
+  rel.forEach(sub=>{
+    (sub.act_labels||'').split(', ').forEach(lbl=>{
+      const act=ALL.find(a=>a.label===lbl); if(!act) return;
+      const c=cats[act.cat];
+      c.totals[sub.name]=(c.totals[sub.name]||0)+act.pts;
+    });
+  });
+  const fLabel=f.startsWith('wk-')?f.slice(3):f==='overall'?'All season':f;
+  let html=`<div style="font-size:12px;font-weight:500;color:var(--text2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em">Period: ${fLabel}</div>`;
+  Object.values(cats).forEach(c=>{
+    const sorted=Object.entries(c.totals).sort((a,b)=>b[1]-a[1]).slice(0,5);
+    html+=`<div class="admin-section"><div class="admin-title">${c.label}</div>`;
+    if(!sorted.length) html+=`<div style="font-size:13px;color:var(--text2);padding:6px 0">No data yet</div>`;
+    else sorted.forEach(([name,pts],i)=>{html+=`<div class="admin-row"><span class="admin-row-name">${i===0?'🏆 ':''}<strong>${name}</strong></span><span class="admin-row-pts">${pts} pts</span></div>`});
+    html+='</div>';
+  });
+  document.getElementById('admin-content').innerHTML=html;
+}
+
+// ── Leaderboard ───────────────────────────────────────────────
+function renderLB(){
+  const f=getF(), rel=getRelSubs(f), isWeek=f.startsWith('wk-');
+  const totals={};
+  rel.forEach(s=>{ totals[s.name]=(totals[s.name]||0)+s.pts; });
+  const data=Object.entries(totals).map(([name,total])=>({name,total})).sort((a,b)=>b.total-a.total).slice(0,10);
+  const list=document.getElementById('lb-list');
+  if(!data.length){list.innerHTML='<div class="lb-empty">No entries yet — be the first to submit! 🔥</div>';return;}
+  const medals=['🥇','🥈','🥉'], max=data[0].total||1;
+  const colLabel=isWeek?f.slice(3):f==='overall'?'All season':f;
+  list.innerHTML=data.map((d,i)=>{
+    const pct=Math.round(d.total/max*100);
+    const rank=i===0&&isWeek?'🚒':i<3?medals[i]:`${i+1}`;
+    const truckLabel=i===0&&isWeek?` <span style="font-size:11px;color:var(--brand2);font-weight:500">🔥 drives the truck</span>`:'';
+    return`<div class="lbr"><div class="lbr-rank" style="font-size:${i<3||isWeek?18:14}px">${rank}</div><div class="lbr-name">${d.name}${truckLabel}</div><div class="lbr-mo">${colLabel}</div><div class="lbr-tot">${d.total} pts</div><div class="lbr-prog"><div class="lbr-fill" style="width:${pct}%"></div></div></div>`;
+  }).join('');
+  if(document.getElementById('admin-chk').checked) renderAdmin();
+}
+
+// ── Submit tab ────────────────────────────────────────────────
+function onMonthChange(){
+  const m=document.getElementById('ag-month').value, ws=document.getElementById('ag-week');
+  ws.innerHTML='<option value="">Select week...</option>';
+  if(m&&WEEKS[m]){ WEEKS[m].forEach(w=>{const o=document.createElement('option');o.value=w;o.textContent=w;ws.appendChild(o)});ws.disabled=false; }
+  else{ ws.innerHTML='<option value="">Select month first...</option>';ws.disabled=true; }
+  onCtx();
+}
+
+function getCtx(){ return{name:document.getElementById('ag-name').value.trim(),month:document.getElementById('ag-month').value,week:document.getElementById('ag-week').value}; }
+
+async function onCtx(){
+  const{name,month,week}=getCtx(), warn=document.getElementById('dup-warn'), area=document.getElementById('history-area');
+  if(name&&month&&week){
+    const dup=SUBS.find(s=>s.name.toLowerCase()===name.toLowerCase()&&s.month===month&&s.week===week);
+    if(dup){warn.className='dup-warn show';warn.innerHTML=`⚠️ You already submitted <strong>${dup.pts} pts</strong> for <strong>${week}</strong>. Check your history below.`;}
+    else warn.className='dup-warn';
+  } else warn.className='dup-warn';
+  if(!name||!month){area.innerHTML='';return;}
+  const p=SUBS.filter(s=>s.name.toLowerCase()===name.toLowerCase()&&s.month===month);
+  const tot=p.reduce((x,s)=>x+s.pts,0);
+  if(!p.length){area.innerHTML=`<div class="hist-box"><div class="hist-head"><span>Your submissions — ${month}</span><span style="color:var(--text2);font-weight:400">No entries yet</span></div><div class="hist-none">Nothing recorded for ${month} yet — you're all clear!</div></div>`;return;}
+  area.innerHTML=`<div class="hist-box"><div class="hist-head"><span>Your submissions — ${month}</span><span>${tot} pts total</span></div>${p.map(s=>`<div class="hist-row"><span class="hist-date">${new Date(s.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric'})}</span><span class="hist-week">${s.week}</span><span class="hist-acts">${s.act_labels}</span><span class="hist-pts">+${s.pts}</span></div>`).join('')}</div>`;
+}
+
+function buildActGrid(){
+  const g=document.getElementById('act-grid');
+  g.innerHTML=[{t:'🏠 Listing activities',acts:LA},{t:'👥 Buyer activities',acts:BA},{t:'⚡ Spark actions',acts:SA}].map(({t,acts})=>
+    `<div class="act-section-label">${t}</div>`+acts.map(a=>
+      `<div class="ac" onclick="document.getElementById('ck-${a.key}').click()"><input type="checkbox" id="ck-${a.key}" data-pts="${a.pts}" data-cat="${a.cat}" onchange="updP()" onclick="event.stopPropagation()"><label class="ac-lbl" for="ck-${a.key}">${a.label}</label><span class="ac-pt">+${a.pts}</span></div>`
+    ).join('')
+  ).join('');
+}
+
+function updP(){
+  let t=0;document.querySelectorAll('#act-grid input:checked').forEach(c=>t+=parseInt(c.dataset.pts));
+  document.getElementById('pts-now').textContent=t+' pts';
+}
+
+async function doSubmit(){
+  const{name,month,week}=getCtx(), ck=document.querySelectorAll('#act-grid input:checked');
+  if(!name){showToast('Please enter your name.','warn');return;}
+  if(!month){showToast('Please select a month.','warn');return;}
+  if(!week){showToast('Please select a week.','warn');return;}
+  if(!ck.length){showToast('Please select at least one activity.','warn');return;}
+  let pts=0; const keys=[];
+  ck.forEach(c=>{pts+=parseInt(c.dataset.pts);keys.push(c.id.replace('ck-',''));});
+  const act_labels=keys.map(k=>ALL.find(a=>a.key===k)?.label||k).join(', ');
+  const btn=document.getElementById('sub-btn');
+  btn.disabled=true; btn.textContent='Submitting...';
+  try{
+    await insertSub({name,month,week,pts,act_labels});
+    await refreshSubs();
+    ck.forEach(c=>c.checked=false); updP();
+    document.getElementById('ag-week').value='';
+    document.getElementById('dup-warn').className='dup-warn';
+    onCtx();
+    showToast(`✓ ${pts} pts submitted for ${name} — ${week}. Leaderboard updated!`,'ok');
+    renderLB();
+  } catch(e){
+    showToast('Submission failed — please try again.','warn');
+    console.error(e);
+  } finally{
+    btn.disabled=false; btn.textContent='Submit points';
+  }
+}
+
+function showToast(msg,type){
+  const t=document.getElementById('toast');t.textContent=msg;t.className='toast '+type;
+  setTimeout(()=>t.className='toast',6000);
+}
+
+// ── Flames ────────────────────────────────────────────────────
+(function(){
+  const fl=document.getElementById('ff');
+  [{l:'3%',w:55,h:72,c:'#FAEEDA',d:'0s'},{l:'10%',w:80,h:95,c:'#FAC775',d:'.25s'},{l:'20%',w:60,h:78,c:'#EF9F27',d:'.5s'},{l:'30%',w:75,h:88,c:'#FAEEDA',d:'.15s'},{l:'40%',w:90,h:100,c:'#FAC775',d:'.4s'},{l:'51%',w:65,h:82,c:'#EF9F27',d:'.7s'},{l:'62%',w:80,h:92,c:'#FAEEDA',d:'.3s'},{l:'72%',w:58,h:75,c:'#FAC775',d:'.55s'},{l:'82%',w:75,h:90,c:'#EF9F27',d:'.1s'},{l:'91%',w:60,h:80,c:'#FAEEDA',d:'.6s'}]
+  .forEach(f=>{const d=document.createElement('div');d.className='flame';d.style.cssText=`left:${f.l};width:${f.w}px;height:${f.h}px;background:${f.c};animation-delay:${f.d}`;fl.appendChild(d);});
+})();
+
+// ── Init ──────────────────────────────────────────────────────
+(async function(){
+  buildPrizes();
+  buildActGrid();
+  await refreshSubs();
+  renderLB();
+})();
+</script>
+</body>
+</html>
