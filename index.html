@@ -414,15 +414,53 @@ function buildPrizes(){
     <p style="font-size:12px;color:var(--text2);margin-top:.5rem">Winners announced and prizes awarded at the Team Meeting on August 11, 2026. 🎁</p>
   </div>`;
 
-  document.getElementById('ma-stack').innerHTML =
-    `<div class="ma-row spark"><span class="ma-ico">&#9889;</span><div class="ma-body"><div class="ma-title">Firestarter Award</div><div class="ma-criteria">Most Spark Action points that month</div></div><span class="ma-pill spark">$40 value</span></div>` +
-    `<div class="ma-row solar"><span class="ma-ico">&#9728;&#65039;</span><div class="ma-body"><div class="ma-title">Solar Flare Award</div><div class="ma-criteria">Most Buyer category points that month</div></div><span class="ma-pill solar">$50 value</span></div>` +
-    `<div class="ma-row flame"><span class="ma-ico">&#128293;</span><div class="ma-body"><div class="ma-title">Burning Flame Award</div><div class="ma-criteria">Most Listing category points that month</div></div><span class="ma-pill flame">$70 value</span></div>`;
+  const maStack = document.getElementById('ma-stack');
+  const maItems = [
+    {row:'spark', ico:'⚡', title:'Firestarter Award',    criteria:'Most Spark Action points that month',   pill:'spark', val:'$40 value'},
+    {row:'solar', ico:'☀️', title:'Solar Flare Award',    criteria:'Most Buyer category points that month', pill:'solar', val:'$50 value'},
+    {row:'flame', ico:'🔥', title:'Burning Flame Award',  criteria:'Most Listing category points that month',pill:'flame', val:'$70 value'},
+  ];
+  maItems.forEach(function(d){
+    var row = document.createElement('div');
+    row.className = 'ma-row ' + d.row;
+    var ico = document.createElement('span');
+    ico.className = 'ma-ico'; ico.textContent = d.ico;
+    var body = document.createElement('div');
+    body.className = 'ma-body';
+    var title = document.createElement('div');
+    title.className = 'ma-title'; title.textContent = d.title;
+    var crit = document.createElement('div');
+    crit.className = 'ma-criteria'; crit.textContent = d.criteria;
+    body.appendChild(title); body.appendChild(crit);
+    var pill = document.createElement('span');
+    pill.className = 'ma-pill ' + d.pill; pill.textContent = d.val;
+    row.appendChild(ico); row.appendChild(body); row.appendChild(pill);
+    maStack.appendChild(row);
+  });
 
-  document.getElementById('gp-stack').innerHTML =
-    `<div class="gp-row g1"><span class="gp-medal">&#129351;</span><div class="gp-body"><div class="gp-place">1st place</div><div class="gp-desc">Highest overall points &mdash; May through July</div></div><span class="gp-value">$1,000 value</span></div>` +
-    `<div class="gp-row g2"><span class="gp-medal">&#129352;</span><div class="gp-body"><div class="gp-place">2nd place</div><div class="gp-desc">Second highest overall points</div></div><span class="gp-value">$500 value</span></div>` +
-    `<div class="gp-row g3"><span class="gp-medal">&#129353;</span><div class="gp-body"><div class="gp-place">3rd place</div><div class="gp-desc">Third highest overall points</div></div><span class="gp-value">$250 value</span></div>`;
+  const gpStack = document.getElementById('gp-stack');
+  const gpItems = [
+    {row:'g1', medal:'🥇', place:'1st place', desc:'Highest overall points — May through July', val:'$1,000 value'},
+    {row:'g2', medal:'🥈', place:'2nd place', desc:'Second highest overall points',             val:'$500 value'},
+    {row:'g3', medal:'🥉', place:'3rd place', desc:'Third highest overall points',              val:'$250 value'},
+  ];
+  gpItems.forEach(function(d){
+    var row = document.createElement('div');
+    row.className = 'gp-row ' + d.row;
+    var medal = document.createElement('span');
+    medal.className = 'gp-medal'; medal.textContent = d.medal;
+    var body = document.createElement('div');
+    body.className = 'gp-body';
+    var place = document.createElement('div');
+    place.className = 'gp-place'; place.textContent = d.place;
+    var desc = document.createElement('div');
+    desc.className = 'gp-desc'; desc.textContent = d.desc;
+    body.appendChild(place); body.appendChild(desc);
+    var val = document.createElement('span');
+    val.className = 'gp-value'; val.textContent = d.val;
+    row.appendChild(medal); row.appendChild(body); row.appendChild(val);
+    gpStack.appendChild(row);
+  });
 }
 
 // ── Tabs ──────────────────────────────────────────────────────
