@@ -111,9 +111,10 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 /* PRIZES */
 .prize-section{margin-bottom:1.75rem}
 .ma-stack,.gp-stack{display:block;margin-bottom:.75rem}
-.ma-row,.gp-row{display:flex;align-items:center;gap:16px;border-radius:var(--radius);border:.5px solid var(--border);background:var(--bg2);padding:1rem 1.25rem;margin-bottom:10px;width:100%}
+.ma-row,.gp-row{display:flex;align-items:center;gap:16px;border-radius:var(--radius);border:.5px solid var(--border);background:var(--bg2);padding:1rem 1.25rem;margin-bottom:10px;width:100%;min-height:72px;clear:both;position:relative;z-index:1}
 .ma-row:last-child,.gp-row:last-child{margin-bottom:0}
 .ma-row.spark{border-color:#EF9F27}.ma-row.solar{border-color:#1D9E75}.ma-row.flame{border-color:#D85A30}
+.ma-stack,.gp-stack{display:block;overflow:hidden}
 .gp-row.g1{border-color:#EF9F27}.gp-row.g2{border-color:#B4B2A9}.gp-row.g3{border-color:#D85A30}
 .ma-ico,.gp-medal{font-size:28px;flex-shrink:0;line-height:1;width:36px}
 .ma-body,.gp-body{flex:1}
@@ -413,25 +414,15 @@ function buildPrizes(){
     <p style="font-size:12px;color:var(--text2);margin-top:.5rem">Winners announced and prizes awarded at the Team Meeting on August 11, 2026. 🎁</p>
   </div>`;
 
-  [
-    {cls:'spark',ico:'⚡',title:'Firestarter Award',criteria:'Most Spark Action points that month',pill:'spark',val:'$40 value'},
-    {cls:'solar',ico:'☀️',title:'Solar Flare Award',criteria:'Most Buyer category points that month',pill:'solar',val:'$50 value'},
-    {cls:'flame',ico:'🔥',title:'Burning Flame Award',criteria:'Most Listing category points that month',pill:'flame',val:'$70 value'},
-  ].forEach(d=>{
-    const r=document.createElement('div');r.className=`ma-row ${d.cls}`;
-    r.innerHTML=`<span class="ma-ico">${d.ico}</span><div class="ma-body"><div class="ma-title">${d.title}</div><div class="ma-criteria">${d.criteria}</div></div><span class="ma-pill ${d.pill}">${d.val}</span>`;
-    document.getElementById('ma-stack').appendChild(r);
-  });
+  document.getElementById('ma-stack').innerHTML =
+    `<div class="ma-row spark"><span class="ma-ico">&#9889;</span><div class="ma-body"><div class="ma-title">Firestarter Award</div><div class="ma-criteria">Most Spark Action points that month</div></div><span class="ma-pill spark">$40 value</span></div>` +
+    `<div class="ma-row solar"><span class="ma-ico">&#9728;&#65039;</span><div class="ma-body"><div class="ma-title">Solar Flare Award</div><div class="ma-criteria">Most Buyer category points that month</div></div><span class="ma-pill solar">$50 value</span></div>` +
+    `<div class="ma-row flame"><span class="ma-ico">&#128293;</span><div class="ma-body"><div class="ma-title">Burning Flame Award</div><div class="ma-criteria">Most Listing category points that month</div></div><span class="ma-pill flame">$70 value</span></div>`;
 
-  [
-    {cls:'g1',medal:'🥇',place:'1st place',val:'$1,000 value',desc:'Highest overall points — May through July'},
-    {cls:'g2',medal:'🥈',place:'2nd place',val:'$500 value',desc:'Second highest overall points'},
-    {cls:'g3',medal:'🥉',place:'3rd place',val:'$250 value',desc:'Third highest overall points'},
-  ].forEach(d=>{
-    const r=document.createElement('div');r.className=`gp-row ${d.cls}`;
-    r.innerHTML=`<span class="gp-medal">${d.medal}</span><div class="gp-body"><div class="gp-place">${d.place}</div><div class="gp-desc">${d.desc}</div></div><span class="gp-value">${d.val}</span>`;
-    document.getElementById('gp-stack').appendChild(r);
-  });
+  document.getElementById('gp-stack').innerHTML =
+    `<div class="gp-row g1"><span class="gp-medal">&#129351;</span><div class="gp-body"><div class="gp-place">1st place</div><div class="gp-desc">Highest overall points &mdash; May through July</div></div><span class="gp-value">$1,000 value</span></div>` +
+    `<div class="gp-row g2"><span class="gp-medal">&#129352;</span><div class="gp-body"><div class="gp-place">2nd place</div><div class="gp-desc">Second highest overall points</div></div><span class="gp-value">$500 value</span></div>` +
+    `<div class="gp-row g3"><span class="gp-medal">&#129353;</span><div class="gp-body"><div class="gp-place">3rd place</div><div class="gp-desc">Third highest overall points</div></div><span class="gp-value">$250 value</span></div>`;
 }
 
 // ── Tabs ──────────────────────────────────────────────────────
