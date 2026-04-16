@@ -7,29 +7,16 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0f0f0f;
-  --bg2:#1a1a1a;
-  --bg3:#222;
-  --border:#2e2e2e;
-  --border2:#383838;
-  --text:#f0ece4;
-  --text2:#a09890;
-  --text3:#6b6460;
-  --brand:#BA7517;
-  --brand2:#D85A30;
-  --brand3:#993C1D;
-  --success-bg:rgba(15,110,86,0.15);
-  --success-text:#4ade80;
-  --success-border:rgba(15,110,86,0.4);
-  --warn-bg:rgba(239,159,39,0.12);
-  --warn-text:#EF9F27;
-  --warn-border:rgba(239,159,39,0.4);
-  --radius:10px;
-  --radius-sm:6px;
+  --bg:#0f0f0f;--bg2:#1a1a1a;--bg3:#222;
+  --border:#2e2e2e;--border2:#383838;
+  --text:#f0ece4;--text2:#a09890;--text3:#6b6460;
+  --brand:#BA7517;--brand2:#D85A30;--brand3:#993C1D;
+  --ok-bg:rgba(15,110,86,0.15);--ok-text:#4ade80;--ok-border:rgba(15,110,86,0.4);
+  --warn-bg:rgba(239,159,39,0.12);--warn-text:#EF9F27;--warn-border:rgba(239,159,39,0.4);
+  --radius:10px;--radius-sm:6px;
 }
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;padding:1rem}
 .itm{max-width:920px;margin:0 auto}
-/* HERO */
 .hero{border-radius:var(--radius);overflow:hidden;padding:2rem 2rem 0;margin-bottom:1.25rem;background:linear-gradient(135deg,#BA7517 0%,#993C1D 55%,#4A1B0C 100%);position:relative}
 .hero-content{position:relative;z-index:2;padding-bottom:2rem}
 .hero-brand{margin-bottom:14px}
@@ -39,18 +26,13 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .hero-subtitle{font-size:15px;font-weight:500;color:#FAC775;margin-bottom:8px}
 .hero-tagline{font-size:13px;color:rgba(250,238,218,.75);font-style:italic;margin-bottom:14px}
 .hero-dates{display:inline-flex;gap:8px;align-items:center;background:rgba(0,0,0,.28);border-radius:var(--radius-sm);padding:6px 14px;font-size:13px;color:#FAC775;font-weight:500}
-.flame-floor{position:relative;height:80px;margin:0 -2rem;overflow:hidden}
-.flame{position:absolute;bottom:0;border-radius:50% 50% 30% 30%;animation:flicker 1.8s ease-in-out infinite alternate;opacity:.5}
-@keyframes flicker{0%{transform:scaleY(1) skewX(-2deg)}100%{transform:scaleY(1.18) skewX(2deg)}}
-/* TABS */
+.flame-floor{position:relative;height:90px;margin:0 -2rem;overflow:hidden}
 .tabs{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap}
 .tb{padding:8px 16px;border-radius:var(--radius-sm);border:.5px solid var(--border2);background:var(--bg2);color:var(--text2);font-size:14px;cursor:pointer;font-family:inherit;transition:all .12s}
 .tb:hover{background:var(--bg3);color:var(--text)}
 .tb.on{background:var(--brand3);border-color:var(--brand3);color:#FAEEDA;font-weight:500}
 .panel{display:none}.panel.on{display:block}
-/* SHARED */
 .sec{font-size:15px;font-weight:500;color:var(--text);margin-bottom:.85rem;padding-bottom:8px;border-bottom:.5px solid var(--border)}
-/* LEADERBOARD */
 .lb-bar-wrap{display:flex;gap:8px;margin-bottom:1rem;align-items:center;flex-wrap:wrap}
 .lb-sel{padding:6px 10px;border-radius:var(--radius-sm);border:.5px solid var(--border2);background:var(--bg2);color:var(--text);font-size:13px;font-family:inherit}
 .lbh{display:grid;grid-template-columns:44px 1fr 80px 80px;gap:8px;padding:5px 12px;font-size:11px;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:.06em}
@@ -63,24 +45,19 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .lbr-prog{grid-column:1/-1;height:3px;background:var(--border2);border-radius:2px;margin-top:-4px}
 .lbr-fill{height:3px;background:var(--brand2);border-radius:2px;transition:width .5s}
 .lb-empty{padding:2rem;text-align:center;color:var(--text2);font-size:14px}
-/* ADMIN */
 .admin-toggle{display:flex;align-items:center;gap:8px;margin-bottom:1rem;padding:8px 12px;background:rgba(153,60,29,0.08);border:.5px solid rgba(153,60,29,0.25);border-radius:var(--radius-sm);cursor:pointer;font-size:13px;color:var(--text2);font-family:inherit;width:100%;text-align:left}
 .admin-toggle input{accent-color:var(--brand3);width:14px;height:14px;cursor:pointer}
-.admin-panel{display:none}
-.admin-panel.show{display:block}
+.admin-panel{display:none}.admin-panel.show{display:block}
 .admin-note{font-size:12px;color:var(--text2);font-style:italic;padding:8px 12px;background:var(--bg3);border-radius:var(--radius-sm);margin-bottom:1rem}
 .admin-section{margin-bottom:1.25rem}
 .admin-title{font-size:12px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
 .admin-row{display:flex;justify-content:space-between;align-items:center;padding:7px 12px;border-radius:var(--radius-sm);background:var(--bg2);border:.5px solid var(--border);margin-bottom:4px;font-size:13px}
-.admin-row-name{color:var(--text)}
-.admin-row-pts{font-weight:500;color:var(--brand)}
-/* RULES */
+.admin-row-name{color:var(--text)}.admin-row-pts{font-weight:500;color:var(--brand)}
 .rules-intro{background:var(--bg2);border-radius:var(--radius-sm);padding:.85rem 1rem;font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:1.25rem}
 .rules-list{list-style:none;margin-bottom:1rem}
 .rules-list li{display:flex;gap:8px;padding:7px 0;border-bottom:.5px solid var(--border);font-size:14px;color:var(--text)}
 .rules-list li:last-child{border:none}
 .rn{font-weight:500;color:var(--brand2);min-width:22px}
-/* POINTS */
 .pts-section{margin-bottom:1.75rem}
 .pts-section-title{font-size:13px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
 .pts-card{background:var(--bg2);border:.5px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:10px}
@@ -108,13 +85,11 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .badge-5{background:rgba(186,117,23,0.15);color:var(--brand)}
 .badge-3{background:var(--bg3);color:var(--text2)}
 .pts-note{background:rgba(186,117,23,0.08);border:.5px solid rgba(186,117,23,0.25);border-radius:var(--radius-sm);padding:.75rem 1rem;font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:1.5rem}
-/* PRIZES */
 .prize-section{margin-bottom:1.75rem}
-.ma-stack,.gp-stack{display:block;margin-bottom:.75rem}
-.ma-row,.gp-row{display:flex;align-items:center;gap:16px;border-radius:var(--radius);border:.5px solid var(--border);background:var(--bg2);padding:1rem 1.25rem;margin-bottom:10px;width:100%;min-height:72px;clear:both;position:relative;z-index:1}
+.ma-stack,.gp-stack{display:block;margin-bottom:.75rem;overflow:hidden}
+.ma-row,.gp-row{display:flex;align-items:center;gap:16px;border-radius:var(--radius);border:.5px solid var(--border);background:var(--bg2);padding:1rem 1.25rem;margin-bottom:10px;width:100%;min-height:72px;position:relative;z-index:1}
 .ma-row:last-child,.gp-row:last-child{margin-bottom:0}
 .ma-row.spark{border-color:#EF9F27}.ma-row.solar{border-color:#1D9E75}.ma-row.flame{border-color:#D85A30}
-.ma-stack,.gp-stack{display:block;overflow:hidden}
 .gp-row.g1{border-color:#EF9F27}.gp-row.g2{border-color:#B4B2A9}.gp-row.g3{border-color:#D85A30}
 .ma-ico,.gp-medal{font-size:28px;flex-shrink:0;line-height:1;width:36px}
 .ma-body,.gp-body{flex:1}
@@ -141,21 +116,28 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .fi{width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:.5px solid var(--border2);background:var(--bg2);color:var(--text);font-size:14px;font-family:inherit}
 .fi:focus{outline:none;border-color:var(--brand)}
 .fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:.9rem}
-.act-section-label{font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;padding:8px 0 4px;grid-column:1/-1}
-.act-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.ac{display:flex;align-items:center;gap:7px;background:var(--bg2);border-radius:var(--radius-sm);padding:8px 10px;cursor:pointer;border:.5px solid transparent}
-.ac:hover{border-color:var(--border2)}
-.ac input{accent-color:var(--brand);width:14px;height:14px;cursor:pointer}
-.ac-lbl{font-size:12px;color:var(--text);cursor:pointer;flex:1;line-height:1.4}
-.ac-pt{font-size:11px;color:var(--brand);font-weight:500;white-space:nowrap}
-.pts-prev{background:var(--bg2);border-radius:var(--radius-sm);padding:10px 14px;display:flex;justify-content:space-between;align-items:center;margin:.9rem 0}
-.pts-prev span:first-child{font-size:13px;color:var(--text2)}
-.pts-prev span:last-child{font-size:20px;font-weight:500;color:var(--brand)}
+.act-section-label{font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;padding:10px 12px 6px;background:var(--bg3);border-radius:var(--radius-sm) var(--radius-sm) 0 0;margin-top:1.25rem;border:.5px solid var(--border);border-bottom:none}
+.act-section-label:first-child{margin-top:0}
+.act-table{width:100%;border-collapse:collapse;background:var(--bg2);border:.5px solid var(--border);border-top:none;border-radius:0 0 var(--radius-sm) var(--radius-sm);overflow:hidden;margin-bottom:0}
+.act-table th{text-align:left;font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;padding:6px 12px;border-bottom:.5px solid var(--border);background:rgba(186,117,23,0.05)}
+.act-table th.r{text-align:right}.act-table th.c{text-align:center}
+.act-row td{padding:10px 12px;border-bottom:.5px solid var(--border);vertical-align:middle}
+.act-row:last-child td{border-bottom:none}
+.act-row:hover td{background:var(--bg3)}
+.act-name{font-size:13px;font-weight:500;color:var(--text)}
+.act-unit-cell{font-size:13px;color:var(--brand);text-align:center;font-weight:500;min-width:56px}
+.act-qty-wrap{text-align:center;min-width:70px}
+.act-qty{width:58px;padding:5px 6px;border-radius:var(--radius-sm);border:.5px solid var(--border2);background:var(--bg3);color:var(--text);font-size:15px;font-family:inherit;text-align:center}
+.act-qty:focus{outline:none;border-color:var(--brand)}
+.act-sub{font-size:14px;font-weight:500;color:var(--brand);text-align:right;min-width:64px}
+.act-sub.zero{color:var(--text3);font-weight:400}
+.pts-summary{background:var(--bg2);border:.5px solid var(--border2);border-radius:var(--radius-sm);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;margin:1.25rem 0 .9rem}
+.pts-summary-label{font-size:13px;color:var(--text2)}
+.pts-summary-val{font-size:22px;font-weight:500;color:var(--brand)}
 .sub-btn{padding:10px 28px;background:var(--brand3);color:#FAEEDA;border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:500;cursor:pointer;font-family:inherit}
-.sub-btn:hover{background:#BA4A23}
-.sub-btn:disabled{opacity:.5;cursor:not-allowed}
+.sub-btn:hover{background:#BA4A23}.sub-btn:disabled{opacity:.5;cursor:not-allowed}
 .toast{display:none;padding:10px 14px;border-radius:var(--radius-sm);font-size:13px;margin-top:.75rem}
-.toast.ok{display:block;background:var(--success-bg);color:var(--success-text);border:.5px solid var(--success-border)}
+.toast.ok{display:block;background:var(--ok-bg);color:var(--ok-text);border:.5px solid var(--ok-border)}
 .toast.warn{display:block;background:var(--warn-bg);color:var(--warn-text);border:.5px solid var(--warn-border)}
 .dup-warn{display:none;background:var(--warn-bg);border:.5px solid var(--warn-border);border-radius:var(--radius-sm);padding:10px 14px;font-size:13px;color:var(--warn-text);margin-bottom:.9rem;line-height:1.5}
 .dup-warn.show{display:block}
@@ -169,7 +151,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .hist-none{padding:10px 12px;font-size:13px;color:var(--text2);font-style:italic}
 .loading{padding:1.5rem;text-align:center;color:var(--text2);font-size:13px}
 @media(max-width:600px){.fg3{grid-template-columns:1fr 1fr}.pts-base-row{flex-direction:column}.pts-base-val{border-left:none;border-top:.5px solid var(--border);min-width:unset;padding:.5rem 1rem}}
-@media(max-width:480px){.fg3{grid-template-columns:1fr}.act-grid{grid-template-columns:1fr}.lbh,.lbr{grid-template-columns:36px 1fr 60px 60px}.hero-title{font-size:22px}}
+@media(max-width:480px){.fg3{grid-template-columns:1fr}.lbh,.lbr{grid-template-columns:36px 1fr 60px 60px}.hero-title{font-size:22px}}
 </style>
 </head>
 <body>
@@ -223,13 +205,13 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
         <option value="wk-Jul 29–31">Week: Jul 29–31</option>
       </optgroup>
     </select>
-    <span style="font-size:12px;color:var(--text2)">Live leaderboard · use weekly filter for 🚒 firetruck winner</span>
+    <span style="font-size:12px;color:var(--text2)">Live leaderboard · weekly filter shows 🚒 firetruck winner</span>
   </div>
   <button class="admin-toggle" onclick="toggleAdmin()">
     <input type="checkbox" id="admin-chk" onclick="event.stopPropagation()"> Show category breakdown (admin — monthly award winners)
   </button>
   <div class="admin-panel" id="admin-panel">
-    <div class="admin-note">Admin view — top agents by category points for the selected period. Use to determine monthly award winners.</div>
+    <div class="admin-note">Admin view — top agents by category points for the selected period. Use this to determine monthly award winners.</div>
     <div id="admin-content"></div>
   </div>
   <div class="lbh"><span>#</span><span>Agent</span><span style="text-align:right">Period</span><span style="text-align:right">Total</span></div>
@@ -242,10 +224,10 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
   <p class="sec">How it works</p>
   <ul class="rules-list">
     <li><span class="rn">1.</span>Perform approved real estate activities throughout the week to earn points.</li>
-    <li><span class="rn">2.</span>Submit your activities once per week using the Submit tab — select the week you are reporting for.</li>
-    <li><span class="rn">3.</span>One submission per agent per week. Your submission history loads automatically when you enter your name.</li>
-    <li><span class="rn">4.</span>If you forgot to submit a prior week, you may still submit for that week — select the correct week from the dropdown.</li>
-    <li><span class="rn">5.</span>Points tally continuously across all weeks — watch your rank rise on the Heat Index.</li>
+    <li><span class="rn">2.</span>Submit once per week using the Submit tab — enter a quantity for each activity you completed. Multiple of the same activity in one week all count.</li>
+    <li><span class="rn">3.</span>One submission per agent per week. Your history loads automatically when you enter your name.</li>
+    <li><span class="rn">4.</span>Forgot a prior week? You can still submit for it — just select the correct week from the dropdown.</li>
+    <li><span class="rn">5.</span>Points tally continuously — watch your rank rise on the Heat Index.</li>
     <li><span class="rn">6.</span>The top point earner each week gets to drive the remote-controlled firetruck around the office!</li>
     <li><span class="rn">7.</span>Monthly category awards for each month will be presented at the following Team Meeting.</li>
     <li><span class="rn">8.</span>Overall top 3 grand prizes announced and awarded at the Team Meeting on <strong>August 11, 2026</strong>.</li>
@@ -256,20 +238,20 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <!-- POINTS -->
 <div id="tab-pts" class="panel">
   <p class="sec">How points work</p>
-  <div class="pts-note">Each base activity earns a set number of points. For Listing and Buyer agreements, you can also earn <strong>+5 bonus points</strong> based on how that lead was sourced.</div>
+  <div class="pts-note">Each activity earns points <strong>per occurrence</strong>. If you executed 3 listing agreements, enter 3 — your points calculate automatically. Bonus source points stack on top of the base activity.</div>
   <div class="pts-section">
     <div class="pts-section-title">🏠 Listing category</div>
     <div class="pts-card">
       <div class="pts-base-row">
-        <div class="pts-base-info"><div class="pts-base-name">Executed Exclusive Listing Agreement</div><div class="pts-base-desc">Signed and executed exclusive employment agreement with a seller</div></div>
+        <div class="pts-base-info"><div class="pts-base-name">Executed Exclusive Listing Agreement</div><div class="pts-base-desc">Per signed and executed agreement</div></div>
         <div class="pts-base-val">10 pts</div>
       </div>
       <div class="pts-bonuses">
-        <div class="pts-bonus-label">+5 bonus if lead came from:</div>
-        <div class="pts-bonus-row"><span class="pts-bonus-name">Unrepresented seller / FSBO</span><span class="pts-bonus-val">+5 pts</span></div>
-        <div class="pts-bonus-row"><span class="pts-bonus-name">Expired or cancelled listing</span><span class="pts-bonus-val">+5 pts</span></div>
-        <div class="pts-bonus-row"><span class="pts-bonus-name">Farming / geographic prospecting</span><span class="pts-bonus-val">+5 pts</span></div>
-        <div class="pts-bonus-row"><span class="pts-bonus-name">Referral</span><span class="pts-bonus-val">+5 pts</span></div>
+        <div class="pts-bonus-label">+5 bonus per listing if lead came from:</div>
+        <div class="pts-bonus-row"><span class="pts-bonus-name">Unrepresented seller / FSBO</span><span class="pts-bonus-val">+5 pts each</span></div>
+        <div class="pts-bonus-row"><span class="pts-bonus-name">Expired or cancelled listing</span><span class="pts-bonus-val">+5 pts each</span></div>
+        <div class="pts-bonus-row"><span class="pts-bonus-name">Farming / geographic prospecting</span><span class="pts-bonus-val">+5 pts each</span></div>
+        <div class="pts-bonus-row"><span class="pts-bonus-name">Referral</span><span class="pts-bonus-val">+5 pts each</span></div>
       </div>
     </div>
   </div>
@@ -277,20 +259,20 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
     <div class="pts-section-title">👥 Buyer category</div>
     <div class="pts-card">
       <div class="pts-base-row">
-        <div class="pts-base-info"><div class="pts-base-name">Executed Buyer-Broker Exclusive Employment Agreement</div><div class="pts-base-desc">Signed and executed exclusive buyer-broker agreement</div></div>
+        <div class="pts-base-info"><div class="pts-base-name">Executed Buyer-Broker Exclusive Employment Agreement</div><div class="pts-base-desc">Per signed and executed agreement</div></div>
         <div class="pts-base-val">10 pts</div>
       </div>
       <div class="pts-bonuses">
-        <div class="pts-bonus-label">+5 bonus if buyer came from:</div>
-        <div class="pts-bonus-row"><span class="pts-bonus-name">Unrepresented / walk-in buyer</span><span class="pts-bonus-val">+5 pts</span></div>
-        <div class="pts-bonus-row"><span class="pts-bonus-name">Open house</span><span class="pts-bonus-val">+5 pts</span></div>
-        <div class="pts-bonus-row"><span class="pts-bonus-name">Farming / geographic prospecting</span><span class="pts-bonus-val">+5 pts</span></div>
-        <div class="pts-bonus-row"><span class="pts-bonus-name">Referral</span><span class="pts-bonus-val">+5 pts</span></div>
+        <div class="pts-bonus-label">+5 bonus per agreement if buyer came from:</div>
+        <div class="pts-bonus-row"><span class="pts-bonus-name">Unrepresented / walk-in buyer</span><span class="pts-bonus-val">+5 pts each</span></div>
+        <div class="pts-bonus-row"><span class="pts-bonus-name">Open house</span><span class="pts-bonus-val">+5 pts each</span></div>
+        <div class="pts-bonus-row"><span class="pts-bonus-name">Farming / geographic prospecting</span><span class="pts-bonus-val">+5 pts each</span></div>
+        <div class="pts-bonus-row"><span class="pts-bonus-name">Referral</span><span class="pts-bonus-val">+5 pts each</span></div>
       </div>
     </div>
     <div class="pts-card">
       <div class="pts-base-row">
-        <div class="pts-base-info"><div class="pts-base-name">Executed Buyer-Broker To-Show Agreement</div><div class="pts-base-desc">Signed to-show agreement before showing properties</div></div>
+        <div class="pts-base-info"><div class="pts-base-name">Executed Buyer-Broker To-Show Agreement</div><div class="pts-base-desc">Per signed to-show agreement</div></div>
         <div class="pts-base-val">5 pts</div>
       </div>
     </div>
@@ -299,12 +281,12 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
     <div class="pts-section-title">⚡ Spark actions</div>
     <div class="pts-card">
       <table class="spark-table">
-        <thead><tr><th>Activity</th><th>Pts</th></tr></thead>
+        <thead><tr><th>Activity</th><th>Pts each</th></tr></thead>
         <tbody>
           <tr><td><div class="spark-name">Appointment Held <span class="spark-badge badge-5">5 pts</span></div><div class="spark-desc">In-person or virtual presentation</div></td><td class="spark-pts">5</td></tr>
           <tr><td><div class="spark-name">Targeted Digital Marketing Campaign <span class="spark-badge badge-5">5 pts</span></div><div class="spark-desc">Ads or email blasts</div></td><td class="spark-pts">5</td></tr>
-          <tr><td><div class="spark-name">Host Open House / Broker Open <span class="spark-badge badge-5">5 pts</span></div><div class="spark-desc">Advertised and promoted on social media and IDX</div></td><td class="spark-pts">5</td></tr>
-          <tr><td><div class="spark-name">Posting a Video on Social Media <span class="spark-badge badge-3">3 pts</span></div><div class="spark-desc">One video across any platform</div></td><td class="spark-pts">3</td></tr>
+          <tr><td><div class="spark-name">Host Open House / Broker Open <span class="spark-badge badge-5">5 pts</span></div><div class="spark-desc">Advertised on social media and IDX</div></td><td class="spark-pts">5</td></tr>
+          <tr><td><div class="spark-name">Posting a Video on Social Media <span class="spark-badge badge-3">3 pts</span></div><div class="spark-desc">One video, any platform</div></td><td class="spark-pts">3</td></tr>
           <tr><td><div class="spark-name">Attend a Market Center Event / Class / Training <span class="spark-badge badge-3">3 pts</span></div><div class="spark-desc">Any office</div></td><td class="spark-pts">3</td></tr>
           <tr><td><div class="spark-name">Activate a Smart Plan <span class="spark-badge badge-3">3 pts</span></div><div class="spark-desc">Automated follow-up tasks</div></td><td class="spark-pts">3</td></tr>
           <tr><td><div class="spark-name">Floor Time <span class="spark-badge badge-3">3 pts</span></div><div class="spark-desc">Per slot sign up</div></td><td class="spark-pts">3</td></tr>
@@ -316,9 +298,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 </div>
 
 <!-- PRIZES -->
-<div id="tab-prizes" class="panel">
-  <div id="prizes-content"></div>
-</div>
+<div id="tab-prizes" class="panel"><div id="prizes-content"></div></div>
 
 <!-- SUBMIT -->
 <div id="tab-sub" class="panel">
@@ -330,185 +310,243 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
   </div>
   <div class="dup-warn" id="dup-warn"></div>
   <div id="history-area"></div>
-  <p class="fl" style="margin:0 0 6px">Select every activity completed this week — include bonus sources where applicable</p>
-  <div class="act-grid" id="act-grid"></div>
-  <div class="pts-prev"><span>Points this submission</span><span id="pts-now">0 pts</span></div>
+  <p style="font-size:13px;color:var(--text2);margin-bottom:12px">Enter a quantity for each activity completed this week. Points calculate automatically as you type.</p>
+  <div id="act-form"></div>
+  <div class="pts-summary">
+    <span class="pts-summary-label">Total points this submission</span>
+    <span class="pts-summary-val" id="pts-now">0 pts</span>
+  </div>
   <button class="sub-btn" id="sub-btn" onclick="doSubmit()">Submit points</button>
   <div class="toast" id="toast"></div>
 </div>
 
-</div><!-- .itm -->
+</div>
 
 <script>
-// ── Supabase config ──────────────────────────────────────────
-const SB_URL = 'https://viekqcmtoxweerxonbor.supabase.co';
-const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZpZWtxY210b3h3ZWVyeG9uYm9yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxMDQ2MTEsImV4cCI6MjA5MTY4MDYxMX0.fvG7d4l5jYRbnrclR7n9YD43QHWfYrzA-RcIinc4BrA';
-
-async function sbFetch(path, opts={}){
-  const res = await fetch(`${SB_URL}/rest/v1/${path}`, {
-    headers: {
-      'apikey': SB_KEY,
-      'Authorization': `Bearer ${SB_KEY}`,
-      'Content-Type': 'application/json',
-      'Prefer': opts.prefer || 'return=minimal',
-      ...opts.headers
-    },
-    ...opts
-  });
-  if(!res.ok){ const e=await res.text(); throw new Error(e); }
-  const ct = res.headers.get('content-type')||'';
-  return ct.includes('json') ? res.json() : null;
+const SB_URL='https://viekqcmtoxweerxonbor.supabase.co';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZpZWtxY210b3h3ZWVyeG9uYm9yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxMDQ2MTEsImV4cCI6MjA5MTY4MDYxMX0.fvG7d4l5jYRbnrclR7n9YD43QHWfYrzA-RcIinc4BrA';
+async function sbFetch(path,opts={}){
+  const r=await fetch(SB_URL+'/rest/v1/'+path,{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':opts.prefer||'return=minimal',...(opts.headers||{})},...opts});
+  if(!r.ok)throw new Error(await r.text());
+  const ct=r.headers.get('content-type')||'';
+  return ct.includes('json')?r.json():null;
 }
+async function loadSubs(){return sbFetch('submissions?select=*&order=created_at.asc');}
+async function insertSub(row){return sbFetch('submissions',{method:'POST',prefer:'return=minimal',body:JSON.stringify(row)});}
 
-async function loadSubs(){
-  return sbFetch('submissions?select=*&order=created_at.asc');
-}
-
-async function insertSub(row){
-  return sbFetch('submissions', {
-    method:'POST',
-    prefer:'return=minimal',
-    body: JSON.stringify(row)
-  });
-}
-
-// ── Activity definitions ──────────────────────────────────────
 const WEEKS={May:["May 1–7","May 8–14","May 15–21","May 22–28","May 29–31"],June:["Jun 1–7","Jun 8–14","Jun 15–21","Jun 22–28","Jun 29–30"],July:["Jul 1–7","Jul 8–14","Jul 15–21","Jul 22–28","Jul 29–31"]};
-const LA=[{key:"ls",label:"Executed Exclusive Listing Agreement",pts:10,cat:'L'},{key:"lu",label:"Listing bonus — unrepresented seller / FSBO (+5)",pts:5,cat:'L'},{key:"le",label:"Listing bonus — expired / cancelled listing (+5)",pts:5,cat:'L'},{key:"lf",label:"Listing bonus — farming / prospecting (+5)",pts:5,cat:'L'},{key:"lr",label:"Listing bonus — referral (+5)",pts:5,cat:'L'}];
-const BA=[{key:"be",label:"Executed Buyer-Broker Exclusive Agreement",pts:10,cat:'B'},{key:"bts",label:"Executed Buyer-Broker To-Show Agreement",pts:5,cat:'B'},{key:"bu",label:"Buyer bonus — unrepresented / walk-in (+5)",pts:5,cat:'B'},{key:"boh",label:"Buyer bonus — open house (+5)",pts:5,cat:'B'},{key:"bf",label:"Buyer bonus — farming / prospecting (+5)",pts:5,cat:'B'},{key:"br",label:"Buyer bonus — referral (+5)",pts:5,cat:'B'}];
-const SA=[{key:"ah",label:"Appointment held (in-person or virtual)",pts:5,cat:'S'},{key:"dm",label:"Targeted digital marketing campaign (ads/email blasts)",pts:5,cat:'S'},{key:"oh",label:"Host open house / broker open (advertised on social + IDX)",pts:5,cat:'S'},{key:"sv",label:"Posting a video on social media (one, any platform)",pts:3,cat:'S'},{key:"mc",label:"Attend a Market Center event / class / training",pts:3,cat:'S'},{key:"sp",label:"Activate a Smart Plan (automated follow-up)",pts:3,cat:'S'},{key:"ft",label:"Floor time (per slot sign up)",pts:3,cat:'S'},{key:"cp",label:"Circle prospecting (targeted client base)",pts:3,cat:'S'}];
+
+const LA=[
+  {key:'ls',label:'Executed Exclusive Listing Agreement',pts:10,cat:'L'},
+  {key:'lu',label:'Listing bonus — unrepresented seller / FSBO',pts:5,cat:'L'},
+  {key:'le',label:'Listing bonus — expired / cancelled listing',pts:5,cat:'L'},
+  {key:'lf',label:'Listing bonus — farming / prospecting',pts:5,cat:'L'},
+  {key:'lr',label:'Listing bonus — referral',pts:5,cat:'L'},
+];
+const BA=[
+  {key:'be', label:'Executed Buyer-Broker Exclusive Agreement',pts:10,cat:'B'},
+  {key:'bts',label:'Executed Buyer-Broker To-Show Agreement',pts:5,cat:'B'},
+  {key:'bu', label:'Buyer bonus — unrepresented / walk-in',pts:5,cat:'B'},
+  {key:'boh',label:'Buyer bonus — open house',pts:5,cat:'B'},
+  {key:'bf', label:'Buyer bonus — farming / prospecting',pts:5,cat:'B'},
+  {key:'br', label:'Buyer bonus — referral',pts:5,cat:'B'},
+];
+const SA=[
+  {key:'ah',label:'Appointment held (in-person or virtual)',pts:5,cat:'S'},
+  {key:'dm',label:'Targeted digital marketing campaign',pts:5,cat:'S'},
+  {key:'oh',label:'Host open house / broker open',pts:5,cat:'S'},
+  {key:'sv',label:'Posting a video on social media',pts:3,cat:'S'},
+  {key:'mc',label:'Attend a Market Center event / class / training',pts:3,cat:'S'},
+  {key:'sp',label:'Activate a Smart Plan',pts:3,cat:'S'},
+  {key:'ft',label:'Floor time (per slot)',pts:3,cat:'S'},
+  {key:'cp',label:'Circle prospecting',pts:3,cat:'S'},
+];
 const ALL=[...LA,...BA,...SA];
 
-// ── In-memory cache of all submissions ───────────────────────
-let SUBS = [];
+let SUBS=[];
+async function refreshSubs(){try{SUBS=await loadSubs();}catch(e){console.error(e);}}
 
-async function refreshSubs(){
-  try{ SUBS = await loadSubs(); }
-  catch(e){ console.error('Could not load submissions', e); }
-}
+// ── SVG Flames ────────────────────────────────────────────────
+function buildFlames(){
+  const ff=document.getElementById('ff');
+  const W=ff.parentElement.offsetWidth||920, H=90;
+  const ns='http://www.w3.org/2000/svg';
+  const svg=document.createElementNS(ns,'svg');
+  svg.setAttribute('xmlns',ns);
+  svg.setAttribute('width','100%');
+  svg.setAttribute('height',H);
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  svg.style.cssText='position:absolute;bottom:0;left:0;display:block';
 
-// ── Prizes tab (built in JS) ──────────────────────────────────
-function buildPrizes(){
-  const el=document.getElementById('prizes-content');
-  el.innerHTML=`
-  <div class="prize-section">
-    <p class="sec">🚒 Weekly award — every week</p>
-    <div class="weekly-card">
-      <div class="weekly-card-header">
-        <span class="weekly-card-ico">🚒</span>
-        <div><div class="weekly-card-title">Top of the Week</div><div class="weekly-card-sub">Awarded to the highest point earner each week</div></div>
-      </div>
-      <div class="weekly-card-body">
-        <div class="weekly-card-desc">The agent with the <strong>most points for the week</strong> earns the ultimate office bragging rights — they get to drive the <strong>remote-controlled firetruck around the office</strong>. Use the weekly filter on the Heat Index to see who's on top!</div>
-      </div>
-    </div>
-  </div>
-  <div class="prize-section">
-    <p class="sec">🎉 Monthly awards — presented at the following Team Meeting</p>
-    <div class="ma-stack" id="ma-stack"></div>
-    <p style="font-size:12px;color:var(--text2)">Prize revealed and presented at the following month's Team Meeting. 🎁</p>
-  </div>
-  <div class="prize-section">
-    <p class="sec">🏆 Overall grand prizes — announced August 11, 2026</p>
-    <div class="gp-stack" id="gp-stack"></div>
-    <p style="font-size:12px;color:var(--text2);margin-top:.5rem">Winners announced and prizes awarded at the Team Meeting on August 11, 2026. 🎁</p>
-  </div>`;
-
-  const maStack = document.getElementById('ma-stack');
-  const maItems = [
-    {row:'spark', ico:'⚡', title:'Firestarter Award',    criteria:'Most Spark Action points that month',   pill:'spark', val:'$40 value'},
-    {row:'solar', ico:'☀️', title:'Solar Flare Award',    criteria:'Most Buyer category points that month', pill:'solar', val:'$50 value'},
-    {row:'flame', ico:'🔥', title:'Burning Flame Award',  criteria:'Most Listing category points that month',pill:'flame', val:'$70 value'},
+  const defs=document.createElementNS(ns,'defs');
+  // Keyframe animations via style element
+  const style=document.createElementNS(ns,'style');
+  let css='';
+  const flames=[
+    {x:0,  w:70, h:78, c1:'#FAEEDA',c2:'#EF9F27',t:1.6,delay:0},
+    {x:55, w:80, h:90, c1:'#FAC775',c2:'#D85A30',t:1.9,delay:.3},
+    {x:110,w:65, h:70, c1:'#EF9F27',c2:'#BA7517',t:1.5,delay:.6},
+    {x:168,w:75, h:85, c1:'#FAEEDA',c2:'#FAC775',t:1.8,delay:.15},
+    {x:228,w:70, h:75, c1:'#FAC775',c2:'#EF9F27',t:1.7,delay:.45},
+    {x:284,w:82, h:90, c1:'#EF9F27',c2:'#D85A30',t:2.0,delay:.75},
+    {x:345,w:68, h:72, c1:'#FAEEDA',c2:'#BA7517',t:1.6,delay:.2},
+    {x:400,w:76, h:84, c1:'#FAC775',c2:'#EF9F27',t:1.9,delay:.5},
+    {x:458,w:80, h:88, c1:'#EF9F27',c2:'#D85A30',t:1.7,delay:.1},
+    {x:516,w:70, h:76, c1:'#FAEEDA',c2:'#FAC775',t:1.8,delay:.4},
+    {x:572,w:84, h:90, c1:'#FAC775',c2:'#BA7517',t:2.0,delay:.65},
+    {x:632,w:72, h:78, c1:'#EF9F27',c2:'#D85A30',t:1.6,delay:.25},
+    {x:688,w:76, h:82, c1:'#FAEEDA',c2:'#EF9F27',t:1.9,delay:.55},
+    {x:744,w:68, h:74, c1:'#FAC775',c2:'#BA7517',t:1.7,delay:.35},
+    {x:800,w:80, h:88, c1:'#EF9F27',c2:'#D85A30',t:1.8,delay:.7},
+    {x:858,w:72, h:80, c1:'#FAEEDA',c2:'#FAC775',t:1.6,delay:.05},
+    {x:914,w:78, h:86, c1:'#FAC775',c2:'#EF9F27',t:1.9,delay:.8},
   ];
-  maItems.forEach(function(d){
-    var row = document.createElement('div');
-    row.className = 'ma-row ' + d.row;
-    var ico = document.createElement('span');
-    ico.className = 'ma-ico'; ico.textContent = d.ico;
-    var body = document.createElement('div');
-    body.className = 'ma-body';
-    var title = document.createElement('div');
-    title.className = 'ma-title'; title.textContent = d.title;
-    var crit = document.createElement('div');
-    crit.className = 'ma-criteria'; crit.textContent = d.criteria;
-    body.appendChild(title); body.appendChild(crit);
-    var pill = document.createElement('span');
-    pill.className = 'ma-pill ' + d.pill; pill.textContent = d.val;
-    row.appendChild(ico); row.appendChild(body); row.appendChild(pill);
-    maStack.appendChild(row);
+
+  flames.forEach(function(f,i){
+    // Gradient
+    var g=document.createElementNS(ns,'linearGradient');
+    g.setAttribute('id','fg'+i);g.setAttribute('x1','0');g.setAttribute('y1','0');g.setAttribute('x2','0');g.setAttribute('y2','1');
+    var s1=document.createElementNS(ns,'stop');s1.setAttribute('offset','0%');s1.setAttribute('stop-color',f.c1);s1.setAttribute('stop-opacity','1');
+    var s2=document.createElementNS(ns,'stop');s2.setAttribute('offset','100%');s2.setAttribute('stop-color',f.c2);s2.setAttribute('stop-opacity','0.7');
+    g.appendChild(s1);g.appendChild(s2);defs.appendChild(g);
+
+    var cx=f.x+f.w/2;
+    var top=H-f.h;
+    var orig=cx+'px '+H+'px';
+    css+='@keyframes ff'+i+'{0%{transform:scaleY(1) skewX(-3deg);transform-origin:'+orig+'}50%{transform:scaleY(1.1) skewX(2deg);transform-origin:'+orig+'}100%{transform:scaleY(0.95) skewX(-1deg);transform-origin:'+orig+'}}';
+    css+='.fp'+i+'{animation:ff'+i+' '+f.t+'s ease-in-out '+f.delay+'s infinite alternate;}';
+  });
+  style.textContent=css;
+  defs.appendChild(style);
+  svg.appendChild(defs);
+
+  flames.forEach(function(f,i){
+    var cx=f.x+f.w/2;
+    var top=H-f.h;
+    // Main flame path — teardrop/flame shape
+    var d='M '+cx+' '+top
+      +' C '+(cx-f.w*0.08)+' '+(top+f.h*0.18)+', '+(f.x+f.w*0.12)+' '+(top+f.h*0.35)+', '+(f.x)+' '+(top+f.h*0.55)
+      +' C '+(f.x-2)+' '+(top+f.h*0.75)+', '+(f.x)+' '+H+', '+(f.x)+' '+H
+      +' L '+(f.x+f.w)+' '+H
+      +' C '+(f.x+f.w)+' '+H+', '+(f.x+f.w+2)+' '+(top+f.h*0.75)+', '+(f.x+f.w)+' '+(top+f.h*0.55)
+      +' C '+(f.x+f.w*0.88)+' '+(top+f.h*0.35)+', '+(cx+f.w*0.08)+' '+(top+f.h*0.18)+', '+cx+' '+top+' Z';
+    var path=document.createElementNS(ns,'path');
+    path.setAttribute('d',d);
+    path.setAttribute('fill','url(#fg'+i+')');
+    path.setAttribute('opacity','0.88');
+    path.setAttribute('class','fp'+i);
+
+    // Inner bright core
+    var ic=f.x+f.w*0.2, iw=f.w*0.6, itop=top+f.h*0.2;
+    var icx=f.x+f.w/2;
+    var id='M '+icx+' '+(top+f.h*0.08)
+      +' C '+(icx-iw*0.1)+' '+(itop)+', '+(f.x+f.w*0.22)+' '+(top+f.h*0.45)+', '+(f.x+f.w*0.25)+' '+(top+f.h*0.65)
+      +' C '+(f.x+f.w*0.2)+' '+(H-6)+', '+(f.x+f.w*0.22)+' '+H+', '+(f.x+f.w*0.28)+' '+H
+      +' L '+(f.x+f.w*0.72)+' '+H
+      +' C '+(f.x+f.w*0.78)+' '+H+', '+(f.x+f.w*0.8)+' '+(H-6)+', '+(f.x+f.w*0.75)+' '+(top+f.h*0.65)
+      +' C '+(f.x+f.w*0.78)+' '+(top+f.h*0.45)+', '+(icx+iw*0.1)+' '+(itop)+', '+icx+' '+(top+f.h*0.08)+' Z';
+    var inner=document.createElementNS(ns,'path');
+    inner.setAttribute('d',id);
+    inner.setAttribute('fill',f.c1);
+    inner.setAttribute('opacity','0.55');
+    inner.setAttribute('class','fp'+i);
+
+    svg.appendChild(path);
+    svg.appendChild(inner);
   });
 
-  const gpStack = document.getElementById('gp-stack');
-  const gpItems = [
-    {row:'g1', medal:'🥇', place:'1st place', desc:'Highest overall points — May through July', val:'$1,000 value'},
-    {row:'g2', medal:'🥈', place:'2nd place', desc:'Second highest overall points',             val:'$500 value'},
-    {row:'g3', medal:'🥉', place:'3rd place', desc:'Third highest overall points',              val:'$250 value'},
-  ];
-  gpItems.forEach(function(d){
-    var row = document.createElement('div');
-    row.className = 'gp-row ' + d.row;
-    var medal = document.createElement('span');
-    medal.className = 'gp-medal'; medal.textContent = d.medal;
-    var body = document.createElement('div');
-    body.className = 'gp-body';
-    var place = document.createElement('div');
-    place.className = 'gp-place'; place.textContent = d.place;
-    var desc = document.createElement('div');
-    desc.className = 'gp-desc'; desc.textContent = d.desc;
-    body.appendChild(place); body.appendChild(desc);
-    var val = document.createElement('span');
-    val.className = 'gp-value'; val.textContent = d.val;
-    row.appendChild(medal); row.appendChild(body); row.appendChild(val);
-    gpStack.appendChild(row);
+  ff.appendChild(svg);
+}
+
+// ── Prizes ────────────────────────────────────────────────────
+function buildPrizes(){
+  var el=document.getElementById('prizes-content');
+  el.innerHTML='<div class="prize-section"><p class="sec">🚒 Weekly award — every week</p><div class="weekly-card"><div class="weekly-card-header"><span class="weekly-card-ico">🚒</span><div><div class="weekly-card-title">Top of the Week</div><div class="weekly-card-sub">Awarded to the highest point earner each week</div></div></div><div class="weekly-card-body"><div class="weekly-card-desc">The agent with the <strong>most points for the week</strong> earns ultimate office bragging rights — they get to drive the <strong>remote-controlled firetruck around the office</strong>. Use the weekly filter on the Heat Index to see who\'s on top!</div></div></div></div>'
+  +'<div class="prize-section"><p class="sec">🎉 Monthly awards — presented at the following Team Meeting</p><div class="ma-stack" id="ma-stack"></div><p style="font-size:12px;color:var(--text2)">Prize revealed and presented at the following month\'s Team Meeting. 🎁</p></div>'
+  +'<div class="prize-section"><p class="sec">🏆 Overall grand prizes — announced August 11, 2026</p><div class="gp-stack" id="gp-stack"></div><p style="font-size:12px;color:var(--text2);margin-top:.5rem">Winners announced and prizes awarded at the Team Meeting on August 11, 2026. 🎁</p></div>';
+
+  var ms=document.getElementById('ma-stack');
+  [{r:'spark',i:'⚡',t:'Firestarter Award',c:'Most Spark Action points that month',p:'spark',v:'$40 value'},
+   {r:'solar',i:'☀️',t:'Solar Flare Award',c:'Most Buyer category points that month',p:'solar',v:'$50 value'},
+   {r:'flame',i:'🔥',t:'Burning Flame Award',c:'Most Listing category points that month',p:'flame',v:'$70 value'}
+  ].forEach(function(d){
+    var row=document.createElement('div');row.className='ma-row '+d.r;
+    var ico=document.createElement('span');ico.className='ma-ico';ico.textContent=d.i;
+    var body=document.createElement('div');body.className='ma-body';
+    var title=document.createElement('div');title.className='ma-title';title.textContent=d.t;
+    var crit=document.createElement('div');crit.className='ma-criteria';crit.textContent=d.c;
+    body.appendChild(title);body.appendChild(crit);
+    var pill=document.createElement('span');pill.className='ma-pill '+d.p;pill.textContent=d.v;
+    row.appendChild(ico);row.appendChild(body);row.appendChild(pill);
+    ms.appendChild(row);
+  });
+
+  var gs=document.getElementById('gp-stack');
+  [{r:'g1',m:'🥇',p:'1st place',d:'Highest overall points — May through July',v:'$1,000 value'},
+   {r:'g2',m:'🥈',p:'2nd place',d:'Second highest overall points',v:'$500 value'},
+   {r:'g3',m:'🥉',p:'3rd place',d:'Third highest overall points',v:'$250 value'}
+  ].forEach(function(d){
+    var row=document.createElement('div');row.className='gp-row '+d.r;
+    var m=document.createElement('span');m.className='gp-medal';m.textContent=d.m;
+    var body=document.createElement('div');body.className='gp-body';
+    var pl=document.createElement('div');pl.className='gp-place';pl.textContent=d.p;
+    var dc=document.createElement('div');dc.className='gp-desc';dc.textContent=d.d;
+    body.appendChild(pl);body.appendChild(dc);
+    var v=document.createElement('span');v.className='gp-value';v.textContent=d.v;
+    row.appendChild(m);row.appendChild(body);row.appendChild(v);
+    gs.appendChild(row);
   });
 }
 
 // ── Tabs ──────────────────────────────────────────────────────
 function showTab(id,btn){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
-  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('.tb').forEach(function(b){b.classList.remove('on');});
   document.getElementById('tab-'+id).classList.add('on');
   btn.classList.add('on');
-  if(id==='lb') renderLB();
+  if(id==='lb')renderLB();
 }
 
-// ── Admin view ────────────────────────────────────────────────
+// ── Admin ─────────────────────────────────────────────────────
 function toggleAdmin(){
-  const chk=document.getElementById('admin-chk');
+  var chk=document.getElementById('admin-chk');
   chk.checked=!chk.checked;
   document.getElementById('admin-panel').className=chk.checked?'admin-panel show':'admin-panel';
-  if(chk.checked) renderAdmin();
+  if(chk.checked)renderAdmin();
 }
-
-function getF(){ return document.getElementById('lb-filter').value; }
-
+function getF(){return document.getElementById('lb-filter').value;}
 function getRelSubs(f){
-  if(f.startsWith('wk-')){ const wk=f.slice(3); return SUBS.filter(s=>s.week===wk); }
-  if(f==='overall') return SUBS;
-  return SUBS.filter(s=>s.month===f);
+  if(f.startsWith('wk-')){var wk=f.slice(3);return SUBS.filter(function(s){return s.week===wk;});}
+  if(f==='overall')return SUBS;
+  return SUBS.filter(function(s){return s.month===f;});
 }
-
 function renderAdmin(){
-  const f=getF(), rel=getRelSubs(f);
-  const cats={
+  var f=getF(),rel=getRelSubs(f);
+  var cats={
     L:{label:'🔥 Burning Flame — Listing category',totals:{}},
     B:{label:'☀️ Solar Flare — Buyer category',totals:{}},
     S:{label:'⚡ Firestarter — Spark actions',totals:{}}
   };
-  rel.forEach(sub=>{
-    (sub.act_labels||'').split(', ').forEach(lbl=>{
-      const act=ALL.find(a=>a.label===lbl); if(!act) return;
-      const c=cats[act.cat];
-      c.totals[sub.name]=(c.totals[sub.name]||0)+act.pts;
+  // act_labels format: "Label (qty x pts = subtotal) | ..."
+  rel.forEach(function(sub){
+    var labels=sub.act_labels||'';
+    labels.split(' | ').forEach(function(entry){
+      var m=entry.match(/^(.+?)\s*\((\d+)\s*x\s*(\d+)/);
+      if(!m)return;
+      var lbl=m[1].trim(),qty=parseInt(m[2]),ptsEach=parseInt(m[3]);
+      var act=ALL.find(function(a){return a.label===lbl;});
+      if(!act)return;
+      var c=cats[act.cat];
+      c.totals[sub.name]=(c.totals[sub.name]||0)+(qty*ptsEach);
     });
   });
-  const fLabel=f.startsWith('wk-')?f.slice(3):f==='overall'?'All season':f;
-  let html=`<div style="font-size:12px;font-weight:500;color:var(--text2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em">Period: ${fLabel}</div>`;
-  Object.values(cats).forEach(c=>{
-    const sorted=Object.entries(c.totals).sort((a,b)=>b[1]-a[1]).slice(0,5);
-    html+=`<div class="admin-section"><div class="admin-title">${c.label}</div>`;
-    if(!sorted.length) html+=`<div style="font-size:13px;color:var(--text2);padding:6px 0">No data yet</div>`;
-    else sorted.forEach(([name,pts],i)=>{html+=`<div class="admin-row"><span class="admin-row-name">${i===0?'🏆 ':''}<strong>${name}</strong></span><span class="admin-row-pts">${pts} pts</span></div>`});
+  var fLabel=f.startsWith('wk-')?f.slice(3):f==='overall'?'All season':f;
+  var html='<div style="font-size:12px;font-weight:500;color:var(--text2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em">Period: '+fLabel+'</div>';
+  Object.values(cats).forEach(function(c){
+    var sorted=Object.entries(c.totals).sort(function(a,b){return b[1]-a[1];}).slice(0,5);
+    html+='<div class="admin-section"><div class="admin-title">'+c.label+'</div>';
+    if(!sorted.length){html+='<div style="font-size:13px;color:var(--text2);padding:6px 0">No data yet for this period</div>';}
+    else{sorted.forEach(function(e,i){html+='<div class="admin-row"><span class="admin-row-name">'+(i===0?'🏆 ':'')+'<strong>'+e[0]+'</strong></span><span class="admin-row-pts">'+e[1]+' pts</span></div>';});}
     html+='</div>';
   });
   document.getElementById('admin-content').innerHTML=html;
@@ -516,106 +554,117 @@ function renderAdmin(){
 
 // ── Leaderboard ───────────────────────────────────────────────
 function renderLB(){
-  const f=getF(), rel=getRelSubs(f), isWeek=f.startsWith('wk-');
-  const totals={};
-  rel.forEach(s=>{ totals[s.name]=(totals[s.name]||0)+s.pts; });
-  const data=Object.entries(totals).map(([name,total])=>({name,total})).sort((a,b)=>b.total-a.total).slice(0,10);
-  const list=document.getElementById('lb-list');
+  var f=getF(),rel=getRelSubs(f),isWeek=f.startsWith('wk-');
+  var totals={};
+  rel.forEach(function(s){totals[s.name]=(totals[s.name]||0)+s.pts;});
+  var data=Object.entries(totals).map(function(e){return{name:e[0],total:e[1]};}).sort(function(a,b){return b.total-a.total;}).slice(0,10);
+  var list=document.getElementById('lb-list');
   if(!data.length){list.innerHTML='<div class="lb-empty">No entries yet — be the first to submit! 🔥</div>';return;}
-  const medals=['🥇','🥈','🥉'], max=data[0].total||1;
-  const colLabel=isWeek?f.slice(3):f==='overall'?'All season':f;
-  list.innerHTML=data.map((d,i)=>{
-    const pct=Math.round(d.total/max*100);
-    const rank=i===0&&isWeek?'🚒':i<3?medals[i]:`${i+1}`;
-    const truckLabel=i===0&&isWeek?` <span style="font-size:11px;color:var(--brand2);font-weight:500">🔥 drives the truck</span>`:'';
-    return`<div class="lbr"><div class="lbr-rank" style="font-size:${i<3||isWeek?18:14}px">${rank}</div><div class="lbr-name">${d.name}${truckLabel}</div><div class="lbr-mo">${colLabel}</div><div class="lbr-tot">${d.total} pts</div><div class="lbr-prog"><div class="lbr-fill" style="width:${pct}%"></div></div></div>`;
+  var medals=['🥇','🥈','🥉'],max=data[0].total||1;
+  var colLabel=isWeek?f.slice(3):f==='overall'?'All season':f;
+  list.innerHTML=data.map(function(d,i){
+    var pct=Math.round(d.total/max*100);
+    var rank=i===0&&isWeek?'🚒':i<3?medals[i]:(i+1).toString();
+    var truckLabel=i===0&&isWeek?' <span style="font-size:11px;color:var(--brand2);font-weight:500">🔥 drives the truck</span>':'';
+    return'<div class="lbr"><div class="lbr-rank" style="font-size:'+(i<3||isWeek?18:14)+'px">'+rank+'</div><div class="lbr-name">'+d.name+truckLabel+'</div><div class="lbr-mo">'+colLabel+'</div><div class="lbr-tot">'+d.total+' pts</div><div class="lbr-prog"><div class="lbr-fill" style="width:'+pct+'%"></div></div></div>';
   }).join('');
-  if(document.getElementById('admin-chk').checked) renderAdmin();
+  if(document.getElementById('admin-chk').checked)renderAdmin();
 }
 
-// ── Submit tab ────────────────────────────────────────────────
+// ── Submit ────────────────────────────────────────────────────
 function onMonthChange(){
-  const m=document.getElementById('ag-month').value, ws=document.getElementById('ag-week');
+  var m=document.getElementById('ag-month').value,ws=document.getElementById('ag-week');
   ws.innerHTML='<option value="">Select week...</option>';
-  if(m&&WEEKS[m]){ WEEKS[m].forEach(w=>{const o=document.createElement('option');o.value=w;o.textContent=w;ws.appendChild(o)});ws.disabled=false; }
-  else{ ws.innerHTML='<option value="">Select month first...</option>';ws.disabled=true; }
+  if(m&&WEEKS[m]){WEEKS[m].forEach(function(w){var o=document.createElement('option');o.value=w;o.textContent=w;ws.appendChild(o);});ws.disabled=false;}
+  else{ws.innerHTML='<option value="">Select month first...</option>';ws.disabled=true;}
   onCtx();
 }
-
-function getCtx(){ return{name:document.getElementById('ag-name').value.trim(),month:document.getElementById('ag-month').value,week:document.getElementById('ag-week').value}; }
+function getCtx(){return{name:document.getElementById('ag-name').value.trim(),month:document.getElementById('ag-month').value,week:document.getElementById('ag-week').value};}
 
 async function onCtx(){
-  const{name,month,week}=getCtx(), warn=document.getElementById('dup-warn'), area=document.getElementById('history-area');
+  var ctx=getCtx(),name=ctx.name,month=ctx.month,week=ctx.week;
+  var warn=document.getElementById('dup-warn'),area=document.getElementById('history-area');
   if(name&&month&&week){
-    const dup=SUBS.find(s=>s.name.toLowerCase()===name.toLowerCase()&&s.month===month&&s.week===week);
-    if(dup){warn.className='dup-warn show';warn.innerHTML=`⚠️ You already submitted <strong>${dup.pts} pts</strong> for <strong>${week}</strong>. Check your history below.`;}
+    var dup=SUBS.find(function(s){return s.name.toLowerCase()===name.toLowerCase()&&s.month===month&&s.week===week;});
+    if(dup){warn.className='dup-warn show';warn.innerHTML='⚠️ You already submitted <strong>'+dup.pts+' pts</strong> for <strong>'+week+'</strong>. Check your history below.';}
     else warn.className='dup-warn';
   } else warn.className='dup-warn';
   if(!name||!month){area.innerHTML='';return;}
-  const p=SUBS.filter(s=>s.name.toLowerCase()===name.toLowerCase()&&s.month===month);
-  const tot=p.reduce((x,s)=>x+s.pts,0);
-  if(!p.length){area.innerHTML=`<div class="hist-box"><div class="hist-head"><span>Your submissions — ${month}</span><span style="color:var(--text2);font-weight:400">No entries yet</span></div><div class="hist-none">Nothing recorded for ${month} yet — you're all clear!</div></div>`;return;}
-  area.innerHTML=`<div class="hist-box"><div class="hist-head"><span>Your submissions — ${month}</span><span>${tot} pts total</span></div>${p.map(s=>`<div class="hist-row"><span class="hist-date">${new Date(s.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric'})}</span><span class="hist-week">${s.week}</span><span class="hist-acts">${s.act_labels}</span><span class="hist-pts">+${s.pts}</span></div>`).join('')}</div>`;
+  var p=SUBS.filter(function(s){return s.name.toLowerCase()===name.toLowerCase()&&s.month===month;});
+  var tot=p.reduce(function(x,s){return x+s.pts;},0);
+  if(!p.length){area.innerHTML='<div class="hist-box"><div class="hist-head"><span>Your submissions — '+month+'</span><span style="color:var(--text2);font-weight:400">No entries yet</span></div><div class="hist-none">Nothing recorded for '+month+' yet — you\'re all clear!</div></div>';return;}
+  area.innerHTML='<div class="hist-box"><div class="hist-head"><span>Your submissions — '+month+'</span><span>'+tot+' pts total</span></div>'+p.map(function(s){return'<div class="hist-row"><span class="hist-date">'+new Date(s.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric'})+'</span><span class="hist-week">'+s.week+'</span><span class="hist-acts">'+s.act_labels+'</span><span class="hist-pts">+'+s.pts+'</span></div>';}).join('')+'</div>';
 }
 
-function buildActGrid(){
-  const g=document.getElementById('act-grid');
-  g.innerHTML=[{t:'🏠 Listing activities',acts:LA},{t:'👥 Buyer activities',acts:BA},{t:'⚡ Spark actions',acts:SA}].map(({t,acts})=>
-    `<div class="act-section-label">${t}</div>`+acts.map(a=>
-      `<div class="ac" onclick="document.getElementById('ck-${a.key}').click()"><input type="checkbox" id="ck-${a.key}" data-pts="${a.pts}" data-cat="${a.cat}" onchange="updP()" onclick="event.stopPropagation()"><label class="ac-lbl" for="ck-${a.key}">${a.label}</label><span class="ac-pt">+${a.pts}</span></div>`
-    ).join('')
-  ).join('');
+function buildActForm(){
+  var sections=[{title:'🏠 Listing activities',acts:LA},{title:'👥 Buyer activities',acts:BA},{title:'⚡ Spark actions',acts:SA}];
+  var html='';
+  sections.forEach(function(sec){
+    html+='<div class="act-section-label">'+sec.title+'</div>';
+    html+='<table class="act-table"><thead><tr><th>Activity</th><th class="c">Pts each</th><th class="c">Qty</th><th class="r">Subtotal</th></tr></thead><tbody>';
+    sec.acts.forEach(function(a){
+      html+='<tr class="act-row"><td><div class="act-name">'+a.label+'</div></td>'
+        +'<td class="act-unit-cell">'+a.pts+'</td>'
+        +'<td class="act-qty-wrap"><input class="act-qty" id="qty-'+a.key+'" type="number" min="0" max="99" placeholder="0" data-pts="'+a.pts+'" data-key="'+a.key+'" oninput="updTotal()"></td>'
+        +'<td class="act-sub zero" id="sub-'+a.key+'">—</td>'
+        +'</tr>';
+    });
+    html+='</tbody></table>';
+  });
+  document.getElementById('act-form').innerHTML=html;
 }
 
-function updP(){
-  let t=0;document.querySelectorAll('#act-grid input:checked').forEach(c=>t+=parseInt(c.dataset.pts));
-  document.getElementById('pts-now').textContent=t+' pts';
+function updTotal(){
+  var total=0;
+  ALL.forEach(function(a){
+    var inp=document.getElementById('qty-'+a.key);
+    var qty=parseInt(inp&&inp.value)||0;
+    var sub=qty*a.pts;
+    var el=document.getElementById('sub-'+a.key);
+    if(el){el.textContent=qty>0?(sub+' pts'):'—';el.className=qty>0?'act-sub':'act-sub zero';}
+    total+=sub;
+  });
+  document.getElementById('pts-now').textContent=total>0?(total+' pts'):'0 pts';
 }
 
 async function doSubmit(){
-  const{name,month,week}=getCtx(), ck=document.querySelectorAll('#act-grid input:checked');
+  var ctx=getCtx(),name=ctx.name,month=ctx.month,week=ctx.week;
   if(!name){showToast('Please enter your name.','warn');return;}
   if(!month){showToast('Please select a month.','warn');return;}
   if(!week){showToast('Please select a week.','warn');return;}
-  if(!ck.length){showToast('Please select at least one activity.','warn');return;}
-  let pts=0; const keys=[];
-  ck.forEach(c=>{pts+=parseInt(c.dataset.pts);keys.push(c.id.replace('ck-',''));});
-  const act_labels=keys.map(k=>ALL.find(a=>a.key===k)?.label||k).join(', ');
-  const btn=document.getElementById('sub-btn');
-  btn.disabled=true; btn.textContent='Submitting...';
+  var entries=[],pts=0;
+  ALL.forEach(function(a){
+    var inp=document.getElementById('qty-'+a.key);
+    var qty=parseInt(inp&&inp.value)||0;
+    if(qty>0){entries.push({label:a.label,qty:qty,ptsEach:a.pts,subtotal:qty*a.pts});pts+=qty*a.pts;}
+  });
+  if(!entries.length){showToast('Please enter a quantity for at least one activity.','warn');return;}
+  var act_labels=entries.map(function(e){return e.label+' ('+e.qty+' x '+e.ptsEach+' = '+e.subtotal+')';}).join(' | ');
+  var btn=document.getElementById('sub-btn');
+  btn.disabled=true;btn.textContent='Submitting...';
   try{
-    await insertSub({name,month,week,pts,act_labels});
+    await insertSub({name:name,month:month,week:week,pts:pts,act_labels:act_labels});
     await refreshSubs();
-    ck.forEach(c=>c.checked=false); updP();
+    ALL.forEach(function(a){var inp=document.getElementById('qty-'+a.key);if(inp)inp.value='';});
+    updTotal();
     document.getElementById('ag-week').value='';
     document.getElementById('dup-warn').className='dup-warn';
     onCtx();
-    showToast(`✓ ${pts} pts submitted for ${name} — ${week}. Leaderboard updated!`,'ok');
+    showToast('✓ '+pts+' pts submitted for '+name+' — '+week+'!','ok');
     renderLB();
-  } catch(e){
-    showToast('Submission failed — please try again.','warn');
-    console.error(e);
-  } finally{
-    btn.disabled=false; btn.textContent='Submit points';
-  }
+  }catch(e){showToast('Submission failed — please try again.','warn');console.error(e);}
+  finally{btn.disabled=false;btn.textContent='Submit points';}
 }
 
 function showToast(msg,type){
-  const t=document.getElementById('toast');t.textContent=msg;t.className='toast '+type;
-  setTimeout(()=>t.className='toast',6000);
+  var t=document.getElementById('toast');t.textContent=msg;t.className='toast '+type;
+  setTimeout(function(){t.className='toast';},6000);
 }
 
-// ── Flames ────────────────────────────────────────────────────
-(function(){
-  const fl=document.getElementById('ff');
-  [{l:'3%',w:55,h:72,c:'#FAEEDA',d:'0s'},{l:'10%',w:80,h:95,c:'#FAC775',d:'.25s'},{l:'20%',w:60,h:78,c:'#EF9F27',d:'.5s'},{l:'30%',w:75,h:88,c:'#FAEEDA',d:'.15s'},{l:'40%',w:90,h:100,c:'#FAC775',d:'.4s'},{l:'51%',w:65,h:82,c:'#EF9F27',d:'.7s'},{l:'62%',w:80,h:92,c:'#FAEEDA',d:'.3s'},{l:'72%',w:58,h:75,c:'#FAC775',d:'.55s'},{l:'82%',w:75,h:90,c:'#EF9F27',d:'.1s'},{l:'91%',w:60,h:80,c:'#FAEEDA',d:'.6s'}]
-  .forEach(f=>{const d=document.createElement('div');d.className='flame';d.style.cssText=`left:${f.l};width:${f.w}px;height:${f.h}px;background:${f.c};animation-delay:${f.d}`;fl.appendChild(d);});
-})();
-
-// ── Init ──────────────────────────────────────────────────────
 (async function(){
+  buildFlames();
   buildPrizes();
-  buildActGrid();
+  buildActForm();
   await refreshSubs();
   renderLB();
 })();
