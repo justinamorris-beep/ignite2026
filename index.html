@@ -26,7 +26,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .hero-subtitle{font-size:15px;font-weight:500;color:#FAC775;margin-bottom:8px}
 .hero-tagline{font-size:13px;color:rgba(250,238,218,.75);font-style:italic;margin-bottom:14px}
 .hero-dates{display:inline-flex;gap:8px;align-items:center;background:rgba(0,0,0,.28);border-radius:var(--radius-sm);padding:6px 14px;font-size:13px;color:#FAC775;font-weight:500}
-.flame-floor{position:relative;height:90px;margin:0 -2rem;overflow:hidden}
+.sun-floor{position:relative;height:120px;margin:0 -2rem;overflow:hidden;background:linear-gradient(to top,rgba(0,0,0,0.35) 0%,transparent 100%)}
 .tabs{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap}
 .tb{padding:8px 16px;border-radius:var(--radius-sm);border:.5px solid var(--border2);background:var(--bg2);color:var(--text2);font-size:14px;cursor:pointer;font-family:inherit;transition:all .12s}
 .tb:hover{background:var(--bg3);color:var(--text)}
@@ -168,7 +168,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
     <div class="hero-tagline">"Who's bringing the heat this summer?"</div>
     <div class="hero-dates">📅 May 1 – July 31, 2026 &nbsp;·&nbsp; Submit points weekly</div>
   </div>
-  <div class="flame-floor" id="ff"></div>
+  <div class="sun-floor" id="ff"></div>
 </div>
 
 <nav class="tabs" role="tablist">
@@ -367,96 +367,105 @@ let SUBS=[];
 async function refreshSubs(){try{SUBS=await loadSubs();}catch(e){console.error(e);}}
 
 // ── SVG Flames ────────────────────────────────────────────────
-function buildFlames(){
-  const ff=document.getElementById('ff');
-  const W=ff.parentElement.offsetWidth||920, H=90;
-  const ns='http://www.w3.org/2000/svg';
-  const svg=document.createElementNS(ns,'svg');
-  svg.setAttribute('xmlns',ns);
+function buildSun(){
+  var ff=document.getElementById('ff');
+  var W=ff.parentElement.offsetWidth||920;
+  var H=120;
+  var ns='http://www.w3.org/2000/svg';
+  var svg=document.createElementNS(ns,'svg');
   svg.setAttribute('width','100%');
   svg.setAttribute('height',H);
   svg.setAttribute('viewBox','0 0 '+W+' '+H);
-  svg.style.cssText='position:absolute;bottom:0;left:0;display:block';
+  svg.style.cssText='position:absolute;bottom:0;left:0;display:block;overflow:visible';
 
-  const defs=document.createElementNS(ns,'defs');
-  // Keyframe animations via style element
-  const style=document.createElementNS(ns,'style');
-  let css='';
-  const flames=[
-    {x:0,  w:70, h:78, c1:'#FAEEDA',c2:'#EF9F27',t:1.6,delay:0},
-    {x:55, w:80, h:90, c1:'#FAC775',c2:'#D85A30',t:1.9,delay:.3},
-    {x:110,w:65, h:70, c1:'#EF9F27',c2:'#BA7517',t:1.5,delay:.6},
-    {x:168,w:75, h:85, c1:'#FAEEDA',c2:'#FAC775',t:1.8,delay:.15},
-    {x:228,w:70, h:75, c1:'#FAC775',c2:'#EF9F27',t:1.7,delay:.45},
-    {x:284,w:82, h:90, c1:'#EF9F27',c2:'#D85A30',t:2.0,delay:.75},
-    {x:345,w:68, h:72, c1:'#FAEEDA',c2:'#BA7517',t:1.6,delay:.2},
-    {x:400,w:76, h:84, c1:'#FAC775',c2:'#EF9F27',t:1.9,delay:.5},
-    {x:458,w:80, h:88, c1:'#EF9F27',c2:'#D85A30',t:1.7,delay:.1},
-    {x:516,w:70, h:76, c1:'#FAEEDA',c2:'#FAC775',t:1.8,delay:.4},
-    {x:572,w:84, h:90, c1:'#FAC775',c2:'#BA7517',t:2.0,delay:.65},
-    {x:632,w:72, h:78, c1:'#EF9F27',c2:'#D85A30',t:1.6,delay:.25},
-    {x:688,w:76, h:82, c1:'#FAEEDA',c2:'#EF9F27',t:1.9,delay:.55},
-    {x:744,w:68, h:74, c1:'#FAC775',c2:'#BA7517',t:1.7,delay:.35},
-    {x:800,w:80, h:88, c1:'#EF9F27',c2:'#D85A30',t:1.8,delay:.7},
-    {x:858,w:72, h:80, c1:'#FAEEDA',c2:'#FAC775',t:1.6,delay:.05},
-    {x:914,w:78, h:86, c1:'#FAC775',c2:'#EF9F27',t:1.9,delay:.8},
-  ];
+  var defs=document.createElementNS(ns,'defs');
 
-  flames.forEach(function(f,i){
-    // Gradient
-    var g=document.createElementNS(ns,'linearGradient');
-    g.setAttribute('id','fg'+i);g.setAttribute('x1','0');g.setAttribute('y1','0');g.setAttribute('x2','0');g.setAttribute('y2','1');
-    var s1=document.createElementNS(ns,'stop');s1.setAttribute('offset','0%');s1.setAttribute('stop-color',f.c1);s1.setAttribute('stop-opacity','1');
-    var s2=document.createElementNS(ns,'stop');s2.setAttribute('offset','100%');s2.setAttribute('stop-color',f.c2);s2.setAttribute('stop-opacity','0.7');
-    g.appendChild(s1);g.appendChild(s2);defs.appendChild(g);
+  // Radial gradient for sun body
+  var rg=document.createElementNS(ns,'radialGradient');
+  rg.setAttribute('id','sunGrad');rg.setAttribute('cx','50%');rg.setAttribute('cy','50%');rg.setAttribute('r','50%');
+  var rs1=document.createElementNS(ns,'stop');rs1.setAttribute('offset','0%');rs1.setAttribute('stop-color','#FFF5CC');rs1.setAttribute('stop-opacity','1');
+  var rs2=document.createElementNS(ns,'stop');rs2.setAttribute('offset','45%');rs2.setAttribute('stop-color','#FAEEDA');rs2.setAttribute('stop-opacity','1');
+  var rs3=document.createElementNS(ns,'stop');rs3.setAttribute('offset','100%');rs3.setAttribute('stop-color','#EF9F27');rs3.setAttribute('stop-opacity','0.9');
+  rg.appendChild(rs1);rg.appendChild(rs2);rg.appendChild(rs3);defs.appendChild(rg);
 
-    var cx=f.x+f.w/2;
-    var top=H-f.h;
-    var orig=cx+'px '+H+'px';
-    css+='@keyframes ff'+i+'{0%{transform:scaleY(1) skewX(-3deg);transform-origin:'+orig+'}50%{transform:scaleY(1.1) skewX(2deg);transform-origin:'+orig+'}100%{transform:scaleY(0.95) skewX(-1deg);transform-origin:'+orig+'}}';
-    css+='.fp'+i+'{animation:ff'+i+' '+f.t+'s ease-in-out '+f.delay+'s infinite alternate;}';
-  });
-  style.textContent=css;
-  defs.appendChild(style);
+  // Glow gradient
+  var gg=document.createElementNS(ns,'radialGradient');
+  gg.setAttribute('id','glowGrad');gg.setAttribute('cx','50%');gg.setAttribute('cy','50%');gg.setAttribute('r','50%');
+  var gs1=document.createElementNS(ns,'stop');gs1.setAttribute('offset','0%');gs1.setAttribute('stop-color','#FAC775');gs1.setAttribute('stop-opacity','0.4');
+  var gs2=document.createElementNS(ns,'stop');gs2.setAttribute('offset','100%');gs2.setAttribute('stop-color','#EF9F27');gs2.setAttribute('stop-opacity','0');
+  gg.appendChild(gs1);gg.appendChild(gs2);defs.appendChild(gg);
+
+  // Animations
+  var styleEl=document.createElementNS(ns,'style');
+  styleEl.textContent=
+    '@keyframes sunPulse{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}'
+    +'@keyframes rayPulse{0%{opacity:0.7;transform-origin:'+Math.round(W/2)+'px '+H+'px;transform:scaleY(1)}50%{opacity:1;transform-origin:'+Math.round(W/2)+'px '+H+'px;transform:scaleY(1.12)}100%{opacity:0.7;transform-origin:'+Math.round(W/2)+'px '+H+'px;transform:scaleY(1)}}'
+    +'@keyframes rayPulse2{0%{opacity:0.5;transform-origin:'+Math.round(W/2)+'px '+H+'px;transform:scaleY(0.9)}50%{opacity:0.85;transform-origin:'+Math.round(W/2)+'px '+H+'px;transform:scaleY(1.08)}100%{opacity:0.5;transform-origin:'+Math.round(W/2)+'px '+H+'px;transform:scaleY(0.9)}}'
+    +'.sun-body{animation:sunPulse 3s ease-in-out infinite;transform-origin:'+Math.round(W/2)+'px '+H+'px}'
+    +'.ray-a{animation:rayPulse 2.8s ease-in-out infinite}'
+    +'.ray-b{animation:rayPulse2 2.4s ease-in-out 0.4s infinite}'
+    +'.ray-c{animation:rayPulse 3.2s ease-in-out 0.8s infinite}'
+    +'.ray-d{animation:rayPulse2 2.6s ease-in-out 1.2s infinite}';
+  defs.appendChild(styleEl);
   svg.appendChild(defs);
 
-  flames.forEach(function(f,i){
-    var cx=f.x+f.w/2;
-    var top=H-f.h;
-    // Main flame path — teardrop/flame shape
-    var d='M '+cx+' '+top
-      +' C '+(cx-f.w*0.08)+' '+(top+f.h*0.18)+', '+(f.x+f.w*0.12)+' '+(top+f.h*0.35)+', '+(f.x)+' '+(top+f.h*0.55)
-      +' C '+(f.x-2)+' '+(top+f.h*0.75)+', '+(f.x)+' '+H+', '+(f.x)+' '+H
-      +' L '+(f.x+f.w)+' '+H
-      +' C '+(f.x+f.w)+' '+H+', '+(f.x+f.w+2)+' '+(top+f.h*0.75)+', '+(f.x+f.w)+' '+(top+f.h*0.55)
-      +' C '+(f.x+f.w*0.88)+' '+(top+f.h*0.35)+', '+(cx+f.w*0.08)+' '+(top+f.h*0.18)+', '+cx+' '+top+' Z';
-    var path=document.createElementNS(ns,'path');
-    path.setAttribute('d',d);
-    path.setAttribute('fill','url(#fg'+i+')');
-    path.setAttribute('opacity','0.88');
-    path.setAttribute('class','fp'+i);
+  var cx=Math.round(W/2);
+  var cy=H; // sun center sits on the bottom edge — rising
+  var R=78; // sun radius
 
-    // Inner bright core
-    var ic=f.x+f.w*0.2, iw=f.w*0.6, itop=top+f.h*0.2;
-    var icx=f.x+f.w/2;
-    var id='M '+icx+' '+(top+f.h*0.08)
-      +' C '+(icx-iw*0.1)+' '+(itop)+', '+(f.x+f.w*0.22)+' '+(top+f.h*0.45)+', '+(f.x+f.w*0.25)+' '+(top+f.h*0.65)
-      +' C '+(f.x+f.w*0.2)+' '+(H-6)+', '+(f.x+f.w*0.22)+' '+H+', '+(f.x+f.w*0.28)+' '+H
-      +' L '+(f.x+f.w*0.72)+' '+H
-      +' C '+(f.x+f.w*0.78)+' '+H+', '+(f.x+f.w*0.8)+' '+(H-6)+', '+(f.x+f.w*0.75)+' '+(top+f.h*0.65)
-      +' C '+(f.x+f.w*0.78)+' '+(top+f.h*0.45)+', '+(icx+iw*0.1)+' '+(itop)+', '+icx+' '+(top+f.h*0.08)+' Z';
-    var inner=document.createElementNS(ns,'path');
-    inner.setAttribute('d',id);
-    inner.setAttribute('fill',f.c1);
-    inner.setAttribute('opacity','0.55');
-    inner.setAttribute('class','fp'+i);
+  // Outer glow halo
+  var halo=document.createElementNS(ns,'circle');
+  halo.setAttribute('cx',cx);halo.setAttribute('cy',cy);halo.setAttribute('r',R*2.2);
+  halo.setAttribute('fill','url(#glowGrad)');halo.setAttribute('class','sun-body');
+  svg.appendChild(halo);
 
-    svg.appendChild(path);
-    svg.appendChild(inner);
+  // Rays — alternating long and short, spread in a semicircle above horizon
+  var rayData=[
+    {angle:-80,len:38,w:5,cls:'ray-a'},
+    {angle:-65,len:30,w:4,cls:'ray-b'},
+    {angle:-50,len:44,w:6,cls:'ray-a'},
+    {angle:-37,len:28,w:4,cls:'ray-c'},
+    {angle:-25,len:40,w:5,cls:'ray-b'},
+    {angle:-14,len:26,w:4,cls:'ray-d'},
+    {angle:-5, len:38,w:5,cls:'ray-a'},
+    {angle:5,  len:26,w:4,cls:'ray-d'},
+    {angle:14, len:38,w:5,cls:'ray-c'},
+    {angle:25, len:26,w:4,cls:'ray-b'},
+    {angle:37, len:40,w:5,cls:'ray-a'},
+    {angle:50, len:28,w:4,cls:'ray-c'},
+    {angle:65, len:44,w:6,cls:'ray-b'},
+    {angle:80, len:30,w:4,cls:'ray-d'},
+  ];
+  rayData.forEach(function(r){
+    var rad=(r.angle-90)*Math.PI/180;
+    var x1=cx+R*Math.cos(rad);
+    var y1=cy+R*Math.sin(rad);
+    var x2=cx+(R+r.len)*Math.cos(rad);
+    var y2=cy+(R+r.len)*Math.sin(rad);
+    var ray=document.createElementNS(ns,'line');
+    ray.setAttribute('x1',x1.toFixed(1));ray.setAttribute('y1',y1.toFixed(1));
+    ray.setAttribute('x2',x2.toFixed(1));ray.setAttribute('y2',y2.toFixed(1));
+    ray.setAttribute('stroke','#FAEEDA');ray.setAttribute('stroke-width',r.w);
+    ray.setAttribute('stroke-linecap','round');ray.setAttribute('opacity','0.85');
+    ray.setAttribute('class',r.cls);
+    svg.appendChild(ray);
   });
+
+  // Sun body circle
+  var sun=document.createElementNS(ns,'circle');
+  sun.setAttribute('cx',cx);sun.setAttribute('cy',cy);sun.setAttribute('r',R);
+  sun.setAttribute('fill','url(#sunGrad)');sun.setAttribute('class','sun-body');
+  svg.appendChild(sun);
+
+  // Bright inner highlight
+  var highlight=document.createElementNS(ns,'circle');
+  highlight.setAttribute('cx',cx-R*0.18);highlight.setAttribute('cy',cy-R*0.22);
+  highlight.setAttribute('r',R*0.28);highlight.setAttribute('fill','#FFFFFF');highlight.setAttribute('opacity','0.18');
+  svg.appendChild(highlight);
 
   ff.appendChild(svg);
 }
+
 
 // ── Prizes ────────────────────────────────────────────────────
 function buildPrizes(){
@@ -662,7 +671,7 @@ function showToast(msg,type){
 }
 
 (async function(){
-  buildFlames();
+  buildSun();
   buildPrizes();
   buildActForm();
   await refreshSubs();
