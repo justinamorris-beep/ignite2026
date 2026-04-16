@@ -45,14 +45,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .lbr-prog{grid-column:1/-1;height:3px;background:var(--border2);border-radius:2px;margin-top:-4px}
 .lbr-fill{height:3px;background:var(--brand2);border-radius:2px;transition:width .5s}
 .lb-empty{padding:2rem;text-align:center;color:var(--text2);font-size:14px}
-.admin-toggle{display:flex;align-items:center;gap:8px;margin-bottom:1rem;padding:8px 12px;background:rgba(153,60,29,0.08);border:.5px solid rgba(153,60,29,0.25);border-radius:var(--radius-sm);cursor:pointer;font-size:13px;color:var(--text2);font-family:inherit;width:100%;text-align:left}
-.admin-toggle input{accent-color:var(--brand3);width:14px;height:14px;cursor:pointer}
-.admin-panel{display:none}.admin-panel.show{display:block}
-.admin-note{font-size:12px;color:var(--text2);font-style:italic;padding:8px 12px;background:var(--bg3);border-radius:var(--radius-sm);margin-bottom:1rem}
-.admin-section{margin-bottom:1.25rem}
-.admin-title{font-size:12px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
-.admin-row{display:flex;justify-content:space-between;align-items:center;padding:7px 12px;border-radius:var(--radius-sm);background:var(--bg2);border:.5px solid var(--border);margin-bottom:4px;font-size:13px}
-.admin-row-name{color:var(--text)}.admin-row-pts{font-weight:500;color:var(--brand)}
+
 .rules-intro{background:var(--bg2);border-radius:var(--radius-sm);padding:.85rem 1rem;font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:1.25rem}
 .rules-list{list-style:none;margin-bottom:1rem}
 .rules-list li{display:flex;gap:8px;padding:7px 0;border-bottom:.5px solid var(--border);font-size:14px;color:var(--text)}
@@ -187,7 +180,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
       <option value="May">May</option>
       <option value="June">June</option>
       <option value="July">July</option>
-      <optgroup label="── Weekly leaders ──">
+      <optgroup label="── Weekly leaders 🚒 ──">
         <option value="wk-May 1–7">Week: May 1–7</option>
         <option value="wk-May 8–14">Week: May 8–14</option>
         <option value="wk-May 15–21">Week: May 15–21</option>
@@ -204,16 +197,28 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
         <option value="wk-Jul 22–28">Week: Jul 22–28</option>
         <option value="wk-Jul 29–31">Week: Jul 29–31</option>
       </optgroup>
+      <optgroup label="── 🔥 Listing Actions (Burning Flame) ──">
+        <option value="cat-L-overall">Listing Actions — All season</option>
+        <option value="cat-L-May">Listing Actions — May</option>
+        <option value="cat-L-June">Listing Actions — June</option>
+        <option value="cat-L-July">Listing Actions — July</option>
+      </optgroup>
+      <optgroup label="── ☀️ Buyer Actions (Solar Flare) ──">
+        <option value="cat-B-overall">Buyer Actions — All season</option>
+        <option value="cat-B-May">Buyer Actions — May</option>
+        <option value="cat-B-June">Buyer Actions — June</option>
+        <option value="cat-B-July">Buyer Actions — July</option>
+      </optgroup>
+      <optgroup label="── ⚡ Spark Actions (Firestarter) ──">
+        <option value="cat-S-overall">Spark Actions — All season</option>
+        <option value="cat-S-May">Spark Actions — May</option>
+        <option value="cat-S-June">Spark Actions — June</option>
+        <option value="cat-S-July">Spark Actions — July</option>
+      </optgroup>
     </select>
-    <span style="font-size:12px;color:var(--text2)">Live leaderboard · weekly filter shows 🚒 firetruck winner</span>
+    <span style="font-size:12px;color:var(--text2)">Live leaderboard · weekly filter 🚒 · category filters for monthly awards 🏆</span>
   </div>
-  <button class="admin-toggle" onclick="toggleAdmin()">
-    <input type="checkbox" id="admin-chk" onclick="event.stopPropagation()"> Show category breakdown (admin — monthly award winners)
-  </button>
-  <div class="admin-panel" id="admin-panel">
-    <div class="admin-note">Admin view — top agents by category points for the selected period. Use this to determine monthly award winners.</div>
-    <div id="admin-content"></div>
-  </div>
+
   <div class="lbh"><span>#</span><span>Agent</span><span style="text-align:right">Period</span><span style="text-align:right">Total</span></div>
   <div id="lb-list"><div class="loading">Loading leaderboard...</div></div>
 </div>
@@ -518,12 +523,7 @@ function showTab(id,btn){
 }
 
 // ── Admin ─────────────────────────────────────────────────────
-function toggleAdmin(){
-  var chk=document.getElementById('admin-chk');
-  chk.checked=!chk.checked;
-  document.getElementById('admin-panel').className=chk.checked?'admin-panel show':'admin-panel';
-  if(chk.checked)renderAdmin();
-}
+
 function getF(){return document.getElementById('lb-filter').value;}
 function getRelSubs(f){
   if(f.startsWith('wk-')){var wk=f.slice(3);return SUBS.filter(function(s){return s.week===wk;});}
@@ -531,77 +531,150 @@ function getRelSubs(f){
   return SUBS.filter(function(s){return s.month===f;});
 }
 function renderAdmin(){
-  var f=getF(),rel=getRelSubs(f);
+  var f=getF(), rel=getRelSubs(f);
   var cats={
     L:{label:'🔥 Burning Flame — Listing Actions',totals:{}},
     B:{label:'☀️ Solar Flare — Buyer Actions',totals:{}},
     S:{label:'⚡ Firestarter — Spark Actions',totals:{}}
   };
-  // Build a lookup map: label -> {cat, pts} for fast matching
-  var actMap={};
-  ALL.forEach(function(a){ actMap[a.label.toLowerCase().trim()]=a; });
 
+  // Use shared actMap and extractor
+  var actMap=buildActMap();
   rel.forEach(function(sub){
-    var labels=sub.act_labels||'';
-    if(!labels) return;
-    // Format: "Label (qty x ptsEach = subtotal) | Label (qty x ptsEach = subtotal) | ..."
-    labels.split(' | ').forEach(function(entry){
-      entry=entry.trim();
-      if(!entry) return;
-      // Extract label (everything before the last opening paren that has digits)
-      var parenIdx=entry.lastIndexOf('(');
-      if(parenIdx<0) return;
-      var lbl=entry.substring(0,parenIdx).trim().toLowerCase();
-      var parenContent=entry.substring(parenIdx+1);
-      var nums=parenContent.match(/(\d+)\s*x\s*(\d+)/);
-      if(!nums) return;
-      var qty=parseInt(nums[1]);
-      var ptsEach=parseInt(nums[2]);
-      if(!qty||!ptsEach) return;
-      var act=actMap[lbl];
-      if(!act) return;
-      var c=cats[act.cat];
-      if(!c) return;
-      c.totals[sub.name]=(c.totals[sub.name]||0)+(qty*ptsEach);
+    Object.keys(cats).forEach(function(cat){
+      var pts=extractCatPts(sub.act_labels, cat, actMap);
+      if(pts>0) cats[cat].totals[sub.name]=(cats[cat].totals[sub.name]||0)+pts;
     });
   });
 
   var fLabel=f.startsWith('wk-')?f.slice(3):f==='overall'?'All season':f;
-  var html='<div style="font-size:12px;font-weight:500;color:var(--text2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em">Period: '+fLabel+'</div>';
+  var anyData=Object.values(cats).some(function(c){return Object.keys(c.totals).length>0;});
+
+  var html='<div style="font-size:12px;font-weight:500;color:var(--text2);margin-bottom:12px;text-transform:uppercase;letter-spacing:.06em">Category breakdown — '+fLabel+'</div>';
+
+  if(!anyData){
+    html+='<div style="background:var(--bg3);border-radius:var(--radius-sm);padding:12px 16px;font-size:13px;color:var(--text2);margin-bottom:1rem">'
+      +'No category data found for this period. Make sure submissions have been entered using the Submit tab.</div>';
+  }
+
   Object.values(cats).forEach(function(c){
     var sorted=Object.entries(c.totals).sort(function(a,b){return b[1]-a[1];}).slice(0,5);
     html+='<div class="admin-section"><div class="admin-title">'+c.label+'</div>';
     if(!sorted.length){
-      html+='<div style="font-size:13px;color:var(--text2);padding:6px 0;font-style:italic">No activity in this category for the selected period</div>';
+      html+='<div style="font-size:13px;color:var(--text3);padding:5px 0 8px;font-style:italic">No submissions in this category for the selected period</div>';
     } else {
       sorted.forEach(function(e,i){
-        html+='<div class="admin-row"><span class="admin-row-name">'+(i===0?'🏆 ':'')+'<strong>'+e[0]+'</strong></span><span class="admin-row-pts">'+e[1]+' pts</span></div>';
+        html+='<div class="admin-row">'
+          +'<span class="admin-row-name">'+(i===0?'🏆 ':'&nbsp;&nbsp;&nbsp;')+'<strong>'+e[0]+'</strong></span>'
+          +'<span class="admin-row-pts">'+e[1]+' pts</span>'
+          +'</div>';
       });
     }
     html+='</div>';
   });
+
   document.getElementById('admin-content').innerHTML=html;
 }
 
 // ── Leaderboard ───────────────────────────────────────────────
+// Build label->activity lookup (used by both renderLB and renderAdmin)
+function buildActMap(){
+  var m={};
+  ALL.forEach(function(a){ m[a.label.toLowerCase().trim()]=a; });
+  return m;
+}
+
+// Extract category points from a single submission's act_labels string
+function extractCatPts(actLabels, targetCat, actMap){
+  var pts=0;
+  var raw=actLabels||'';
+  if(!raw) return pts;
+
+  // Format A: new pipe+quantity format
+  if(raw.indexOf(' | ')>=0 || /\(\d+ x \d+/.test(raw)){
+    raw.split(' | ').forEach(function(entry){
+      entry=entry.trim(); if(!entry) return;
+      var parenIdx=entry.lastIndexOf('(');
+      var lbl=(parenIdx>=0?entry.substring(0,parenIdx):entry).trim().toLowerCase();
+      var act=actMap[lbl]; if(!act||act.cat!==targetCat) return;
+      if(parenIdx>=0){
+        var m=entry.substring(parenIdx+1).match(/(\d+)\s*x\s*(\d+)/);
+        if(m) pts+=parseInt(m[1])*parseInt(m[2]);
+      } else { pts+=act.pts; }
+    });
+    return pts;
+  }
+  // Format B: old comma-separated format
+  raw.split(', ').forEach(function(lbl){
+    lbl=lbl.trim().toLowerCase(); if(!lbl) return;
+    var act=actMap[lbl]; if(!act||act.cat!==targetCat) return;
+    pts+=act.pts;
+  });
+  return pts;
+}
+
 function renderLB(){
-  var f=getF(),rel=getRelSubs(f),isWeek=f.startsWith('wk-');
+  var f=getF(), isWeek=f.startsWith('wk-'), isCat=f.startsWith('cat-');
+  var list=document.getElementById('lb-list');
+  var medals=['🥇','🥈','🥉'];
+
+  // ── Category leaderboard ──────────────────────────────────
+  if(isCat){
+    var parts=f.slice(4).split('-'); // e.g. "L-May" or "B-overall"
+    var cat=parts[0];
+    var period=parts.slice(1).join('-'); // handles "overall"
+    var catNames={L:'🔥 Listing Actions',B:'☀️ Buyer Actions',S:'⚡ Spark Actions'};
+    var awardNames={L:'Burning Flame Award',B:'Solar Flare Award',S:'Firestarter Award'};
+    var rel=period==='overall'?SUBS:SUBS.filter(function(s){return s.month===period;});
+    var actMap=buildActMap();
+    var totals={};
+    rel.forEach(function(s){
+      var pts=extractCatPts(s.act_labels, cat, actMap);
+      if(pts>0) totals[s.name]=(totals[s.name]||0)+pts;
+    });
+    var data=Object.entries(totals).map(function(e){return{name:e[0],total:e[1]};}).sort(function(a,b){return b.total-a.total;}).slice(0,10);
+    var periodLabel=period==='overall'?'All season':period;
+    if(!data.length){
+      list.innerHTML='<div class="lb-empty">No '+catNames[cat]+' activity yet for '+periodLabel+'</div>';
+      return;
+    }
+    var max=data[0].total||1;
+    var headerHtml='<div style="background:var(--bg2);border:.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">'
+      +'<span style="font-size:14px;font-weight:500;color:var(--text)">'+catNames[cat]+'</span>'
+      +'<span style="font-size:12px;color:var(--text2)">'+awardNames[cat]+' · '+periodLabel+'</span>'
+      +'</div>';
+    list.innerHTML=headerHtml+data.map(function(d,i){
+      var pct=Math.round(d.total/max*100);
+      var rank=i<3?medals[i]:(i+1).toString();
+      var winTag=i===0?' <span style="font-size:11px;color:var(--brand);font-weight:500">← monthly winner</span>':'';
+      return'<div class="lbr"><div class="lbr-rank" style="font-size:'+(i<3?18:14)+'px">'+rank+'</div>'
+        +'<div class="lbr-name">'+d.name+winTag+'</div>'
+        +'<div class="lbr-mo">'+periodLabel+'</div>'
+        +'<div class="lbr-tot">'+d.total+' pts</div>'
+        +'<div class="lbr-prog"><div class="lbr-fill" style="width:'+pct+'%"></div></div></div>';
+    }).join('');
+    return;
+  }
+
+  // ── Standard leaderboard (overall / month / week) ─────────
+  var rel=getRelSubs(f);
   var totals={};
   rel.forEach(function(s){totals[s.name]=(totals[s.name]||0)+s.pts;});
   var data=Object.entries(totals).map(function(e){return{name:e[0],total:e[1]};}).sort(function(a,b){return b.total-a.total;}).slice(0,10);
-  var list=document.getElementById('lb-list');
   if(!data.length){list.innerHTML='<div class="lb-empty">No entries yet — be the first to submit! 🔥</div>';return;}
-  var medals=['🥇','🥈','🥉'],max=data[0].total||1;
+  var max=data[0].total||1;
   var colLabel=isWeek?f.slice(3):f==='overall'?'All season':f;
   list.innerHTML=data.map(function(d,i){
     var pct=Math.round(d.total/max*100);
     var rank=i===0&&isWeek?'🚒':i<3?medals[i]:(i+1).toString();
     var truckLabel=i===0&&isWeek?' <span style="font-size:11px;color:var(--brand2);font-weight:500">🔥 drives the truck</span>':'';
-    return'<div class="lbr"><div class="lbr-rank" style="font-size:'+(i<3||isWeek?18:14)+'px">'+rank+'</div><div class="lbr-name">'+d.name+truckLabel+'</div><div class="lbr-mo">'+colLabel+'</div><div class="lbr-tot">'+d.total+' pts</div><div class="lbr-prog"><div class="lbr-fill" style="width:'+pct+'%"></div></div></div>';
+    return'<div class="lbr"><div class="lbr-rank" style="font-size:'+(i<3||isWeek?18:14)+'px">'+rank+'</div>'
+      +'<div class="lbr-name">'+d.name+truckLabel+'</div>'
+      +'<div class="lbr-mo">'+colLabel+'</div>'
+      +'<div class="lbr-tot">'+d.total+' pts</div>'
+      +'<div class="lbr-prog"><div class="lbr-fill" style="width:'+pct+'%"></div></div></div>';
   }).join('');
-  if(document.getElementById('admin-chk').checked)renderAdmin();
 }
-
 // ── Submit ────────────────────────────────────────────────────
 function onMonthChange(){
   var m=document.getElementById('ag-month').value,ws=document.getElementById('ag-week');
