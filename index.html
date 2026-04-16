@@ -240,7 +240,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
   <p class="sec">How points work</p>
   <div class="pts-note">Each activity earns points <strong>per occurrence</strong>. If you executed 3 listing agreements, enter 3 — your points calculate automatically. Bonus source points stack on top of the base activity.</div>
   <div class="pts-section">
-    <div class="pts-section-title">🏠 Listing category</div>
+    <div class="pts-section-title">🏠 Listing Actions</div>
     <div class="pts-card">
       <div class="pts-base-row">
         <div class="pts-base-info"><div class="pts-base-name">Executed Exclusive Listing Agreement</div><div class="pts-base-desc">Per signed and executed agreement</div></div>
@@ -256,7 +256,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
     </div>
   </div>
   <div class="pts-section">
-    <div class="pts-section-title">👥 Buyer category</div>
+    <div class="pts-section-title">👥 Buyer Actions</div>
     <div class="pts-card">
       <div class="pts-base-row">
         <div class="pts-base-info"><div class="pts-base-name">Executed Buyer-Broker Exclusive Employment Agreement</div><div class="pts-base-desc">Per signed and executed agreement</div></div>
@@ -278,7 +278,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
     </div>
   </div>
   <div class="pts-section">
-    <div class="pts-section-title">⚡ Spark actions</div>
+    <div class="pts-section-title">⚡ Spark Actions</div>
     <div class="pts-card">
       <table class="spark-table">
         <thead><tr><th>Activity</th><th>Pts each</th></tr></thead>
@@ -303,8 +303,9 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <!-- SUBMIT -->
 <div id="tab-sub" class="panel">
   <p class="sec">Submit your weekly activities</p>
+  <datalist id="agent-list"></datalist>
   <div class="fg3">
-    <div class="fg"><label class="fl" for="ag-name">Your name</label><input class="fi" id="ag-name" type="text" placeholder="Full name" autocomplete="off" oninput="onCtx()"/></div>
+    <div class="fg"><label class="fl" for="ag-name">Your name</label><input class="fi" id="ag-name" type="text" placeholder="Start typing your name..." list="agent-list" autocomplete="off" oninput="onCtx()"/></div>
     <div class="fg"><label class="fl" for="ag-month">Month</label><select class="fi" id="ag-month" onchange="onMonthChange()"><option value="">Select month...</option><option value="May">May</option><option value="June">June</option><option value="July">July</option></select></div>
     <div class="fg"><label class="fl" for="ag-week">Week</label><select class="fi" id="ag-week" onchange="onCtx()" disabled><option value="">Select month first...</option></select></div>
   </div>
@@ -476,8 +477,8 @@ function buildPrizes(){
 
   var ms=document.getElementById('ma-stack');
   [{r:'spark',i:'⚡',t:'Firestarter Award',c:'Most Spark Action points that month',p:'spark',v:'$40 value'},
-   {r:'solar',i:'☀️',t:'Solar Flare Award',c:'Most Buyer category points that month',p:'solar',v:'$50 value'},
-   {r:'flame',i:'🔥',t:'Burning Flame Award',c:'Most Listing category points that month',p:'flame',v:'$70 value'}
+   {r:'solar',i:'☀️',t:'Solar Flare Award',c:'Most Buyer Action points that month',p:'solar',v:'$50 value'},
+   {r:'flame',i:'🔥',t:'Burning Flame Award',c:'Most Listing Action points that month',p:'flame',v:'$70 value'}
   ].forEach(function(d){
     var row=document.createElement('div');row.className='ma-row '+d.r;
     var ico=document.createElement('span');ico.className='ma-ico';ico.textContent=d.i;
@@ -532,30 +533,51 @@ function getRelSubs(f){
 function renderAdmin(){
   var f=getF(),rel=getRelSubs(f);
   var cats={
-    L:{label:'🔥 Burning Flame — Listing category',totals:{}},
-    B:{label:'☀️ Solar Flare — Buyer category',totals:{}},
-    S:{label:'⚡ Firestarter — Spark actions',totals:{}}
+    L:{label:'🔥 Burning Flame — Listing Actions',totals:{}},
+    B:{label:'☀️ Solar Flare — Buyer Actions',totals:{}},
+    S:{label:'⚡ Firestarter — Spark Actions',totals:{}}
   };
-  // act_labels format: "Label (qty x pts = subtotal) | ..."
+  // Build a lookup map: label -> {cat, pts} for fast matching
+  var actMap={};
+  ALL.forEach(function(a){ actMap[a.label.toLowerCase().trim()]=a; });
+
   rel.forEach(function(sub){
     var labels=sub.act_labels||'';
+    if(!labels) return;
+    // Format: "Label (qty x ptsEach = subtotal) | Label (qty x ptsEach = subtotal) | ..."
     labels.split(' | ').forEach(function(entry){
-      var m=entry.match(/^(.+?)\s*\((\d+)\s*x\s*(\d+)/);
-      if(!m)return;
-      var lbl=m[1].trim(),qty=parseInt(m[2]),ptsEach=parseInt(m[3]);
-      var act=ALL.find(function(a){return a.label===lbl;});
-      if(!act)return;
+      entry=entry.trim();
+      if(!entry) return;
+      // Extract label (everything before the last opening paren that has digits)
+      var parenIdx=entry.lastIndexOf('(');
+      if(parenIdx<0) return;
+      var lbl=entry.substring(0,parenIdx).trim().toLowerCase();
+      var parenContent=entry.substring(parenIdx+1);
+      var nums=parenContent.match(/(\d+)\s*x\s*(\d+)/);
+      if(!nums) return;
+      var qty=parseInt(nums[1]);
+      var ptsEach=parseInt(nums[2]);
+      if(!qty||!ptsEach) return;
+      var act=actMap[lbl];
+      if(!act) return;
       var c=cats[act.cat];
+      if(!c) return;
       c.totals[sub.name]=(c.totals[sub.name]||0)+(qty*ptsEach);
     });
   });
+
   var fLabel=f.startsWith('wk-')?f.slice(3):f==='overall'?'All season':f;
   var html='<div style="font-size:12px;font-weight:500;color:var(--text2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em">Period: '+fLabel+'</div>';
   Object.values(cats).forEach(function(c){
     var sorted=Object.entries(c.totals).sort(function(a,b){return b[1]-a[1];}).slice(0,5);
     html+='<div class="admin-section"><div class="admin-title">'+c.label+'</div>';
-    if(!sorted.length){html+='<div style="font-size:13px;color:var(--text2);padding:6px 0">No data yet for this period</div>';}
-    else{sorted.forEach(function(e,i){html+='<div class="admin-row"><span class="admin-row-name">'+(i===0?'🏆 ':'')+'<strong>'+e[0]+'</strong></span><span class="admin-row-pts">'+e[1]+' pts</span></div>';});}
+    if(!sorted.length){
+      html+='<div style="font-size:13px;color:var(--text2);padding:6px 0;font-style:italic">No activity in this category for the selected period</div>';
+    } else {
+      sorted.forEach(function(e,i){
+        html+='<div class="admin-row"><span class="admin-row-name">'+(i===0?'🏆 ':'')+'<strong>'+e[0]+'</strong></span><span class="admin-row-pts">'+e[1]+' pts</span></div>';
+      });
+    }
     html+='</div>';
   });
   document.getElementById('admin-content').innerHTML=html;
@@ -605,8 +627,198 @@ async function onCtx(){
   area.innerHTML='<div class="hist-box"><div class="hist-head"><span>Your submissions — '+month+'</span><span>'+tot+' pts total</span></div>'+p.map(function(s){return'<div class="hist-row"><span class="hist-date">'+new Date(s.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric'})+'</span><span class="hist-week">'+s.week+'</span><span class="hist-acts">'+s.act_labels+'</span><span class="hist-pts">+'+s.pts+'</span></div>';}).join('')+'</div>';
 }
 
+// ── Agent roster — add all agent names here ───────────────────
+var AGENTS=[
+  'Alexis McIntosh',
+  'Alicia McPherson',
+  'Amber Rosales',
+  'Amber Taylor',
+  'Amy Casanova',
+  'Amy Emerson',
+  'Amy Pierce',
+  'Angel Vasquez',
+  'Angelique Michelle',
+  'Ann Beede',
+  'Anna Selby',
+  'Arianna Romero',
+  'Ashley Judd',
+  'Austin Head',
+  'Barbara Rotvik',
+  'Bianca Rooney',
+  'Blake Torres',
+  'Brad Ogden',
+  'Brenda Fischer',
+  'Brian Rooney',
+  'Brian Whittington',
+  'Cammy DeVille',
+  'Carrie Cathey',
+  'Carrie Guinn',
+  'Cathy Janecek',
+  'CharLee Brown',
+  'Cindi Miller',
+  'Cindy Dutcher',
+  'Cindy Pearce',
+  'Cody Brown',
+  'Cody Nutt',
+  'Curtie Miller',
+  'DJ Martin',
+  'Damon Griggs-Sanchez',
+  'Daniel Baker',
+  'Danny Scaffidi',
+  'David Hollingsworth',
+  'David Morse',
+  'Dean Baker',
+  'Debbie Lackey',
+  'Debbie Netzke',
+  'Deidra Felder',
+  'Denise Myres',
+  'Denna Ketchum',
+  'Dennis Keene',
+  'Derek Gorra',
+  'Devon Cutshaw',
+  'Diane Noyes',
+  'Donna Blanchette',
+  'Douglas Knauer',
+  'Eric Tilgner',
+  'Erika McPherson',
+  'Erin Uken',
+  'Gail Freeman',
+  'Garrett Luzzi',
+  'Gene Pucelli',
+  'German Marquez',
+  'Gina Bisnar',
+  'Grace Hecht',
+  'Greg Sackos',
+  'Hanna Hernandez',
+  'Heather Engen',
+  'Heather Moss',
+  'Heidi Van Ryn',
+  'Hilory Arness',
+  'Holly Thomas',
+  'Izaiah Orozco',
+  'Jack Dunn',
+  'Jacob Ratliff',
+  'James Bovard',
+  'Jayme Parsons-Harper',
+  'Jeffrey Opsahl',
+  'Jen Fisher',
+  'Jen Gesick',
+  'Jenn Sharma',
+  'Jennifer Luzzi',
+  'Jennifer Mamian',
+  'Jenny Giles',
+  'Jeri Lynn Hernandez',
+  'Jessica Suarez-Villamil',
+  'Jessica Truitt',
+  'Jewell Rusch',
+  'Jill Cone',
+  'Jill McLain',
+  'Jim Vance',
+  'Jimmy Butler',
+  'Jody Bristyan',
+  'Jon Mitchell',
+  'Jorge Flores',
+  'Junell Wilson',
+  'Kathleen Aten',
+  'Kathryn Ludwig',
+  'Katie Wood',
+  'Kenneth Schooley',
+  'Kent Battson',
+  'Kerri Pearce',
+  'Koena Tapscott',
+  'Kristin Dreisbach',
+  'Kristina Horton',
+  'Kyle Yarush',
+  'LHC Front Desk',
+  'Lara Trescher',
+  'Larry Havorka',
+  'Linda Elkins',
+  'Lindsay German',
+  'Lindsay Lowry',
+  'Lisa Blake',
+  'Lisa Byers',
+  'Lisa DiNoto',
+  'Lisa Elliott',
+  'Lori Swartz',
+  'Luke Still',
+  'Lynette Fisher',
+  'Maria Flamiatos',
+  'Mark Player',
+  'Mary McCoy',
+  'Matthew Felder',
+  'Matthew Sepulveda',
+  'Meagan Murphy',
+  'Meagan Pena',
+  'Michael Williams',
+  'Michelle Crowe',
+  'Michelle Pepper',
+  'Mike Honsaker',
+  'Molly Holt',
+  'Morgan Lafferty',
+  'Mychal Gorden',
+  'Nancy Jones',
+  'Nancy Robinson',
+  'Natalie Livermore',
+  'Nerissa Archuleta',
+  'Nichol Dutcher',
+  'Nichole Klier',
+  'Nicole Stewart',
+  'Oggy Steinle',
+  'Paige Mueller',
+  'Parker Bullis',
+  'Pete Mechur',
+  'Rabih Yaghi',
+  'Richard Irminger',
+  'Ruth Williams',
+  'Samantha Krawczyk',
+  'Sandy Longanecker',
+  'Sarah Bovard',
+  'Scott Horton',
+  'Scott McCool',
+  'Sean Severson',
+  'Sergio Perez',
+  'Shannon Jones',
+  'Shaunna Gates',
+  'Shay Givans',
+  'Shelly Moon',
+  'Steve Petrauschke',
+  'Steven Hartwell',
+  'Sue Dearing',
+  'Suzanne Barton',
+  'Suzanne Stadler',
+  'TJ Cutshaw',
+  'Tami Cicerello',
+  'Tami Whisker',
+  'Taylor Bisnar',
+  'Terry Commeau',
+  'Thomas Brinkman',
+  'Tim Thompson',
+  'Todd Sturges',
+  'Tommy Taylor',
+  'Tonya Monroe',
+  'Tyler Beede',
+  'Vicki Lindtwed',
+  'Vicki Runyon',
+  'Victoria Lareau',
+  'Victorria Johnson',
+  'Wendy Smith',
+  'Wes McMurtie',
+  'Wesley Hassell',
+  'Willie Gilmore',
+  'Woody Harper',
+];
+function buildAgentList(){
+  var dl=document.getElementById('agent-list');
+  if(!dl) return;
+  AGENTS.forEach(function(name){
+    var opt=document.createElement('option');
+    opt.value=name;
+    dl.appendChild(opt);
+  });
+}
+
 function buildActForm(){
-  var sections=[{title:'🏠 Listing activities',acts:LA},{title:'👥 Buyer activities',acts:BA},{title:'⚡ Spark actions',acts:SA}];
+  var sections=[{title:'🏠 Listing Actions',acts:LA},{title:'👥 Buyer Actions',acts:BA},{title:'⚡ Spark Actions',acts:SA}];
   var html='';
   sections.forEach(function(sec){
     html+='<div class="act-section-label">'+sec.title+'</div>';
@@ -674,6 +886,7 @@ function showToast(msg,type){
   buildSun();
   buildPrizes();
   buildActForm();
+  buildAgentList();
   await refreshSubs();
   renderLB();
 })();
