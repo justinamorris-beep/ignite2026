@@ -180,22 +180,20 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
       <option value="May">May</option>
       <option value="June">June</option>
       <option value="July">July</option>
-      <optgroup label="── Weekly leaders 🚒 ──">
-        <option value="wk-May 1–7">Week: May 1–7</option>
-        <option value="wk-May 8–14">Week: May 8–14</option>
-        <option value="wk-May 15–21">Week: May 15–21</option>
-        <option value="wk-May 22–28">Week: May 22–28</option>
-        <option value="wk-May 29–31">Week: May 29–31</option>
-        <option value="wk-Jun 1–7">Week: Jun 1–7</option>
-        <option value="wk-Jun 8–14">Week: Jun 8–14</option>
-        <option value="wk-Jun 15–21">Week: Jun 15–21</option>
-        <option value="wk-Jun 22–28">Week: Jun 22–28</option>
-        <option value="wk-Jun 29–30">Week: Jun 29–30</option>
-        <option value="wk-Jul 1–7">Week: Jul 1–7</option>
-        <option value="wk-Jul 8–14">Week: Jul 8–14</option>
-        <option value="wk-Jul 15–21">Week: Jul 15–21</option>
-        <option value="wk-Jul 22–28">Week: Jul 22–28</option>
-        <option value="wk-Jul 29–31">Week: Jul 29–31</option>
+      <optgroup label="── Heat leaders 🚒 ──">
+        <option value="wk-Heat 1: May 1–7">Heat 1: May 1–7</option>
+        <option value="wk-Heat 2: May 8–14">Heat 2: May 8–14</option>
+        <option value="wk-Heat 3: May 15–21">Heat 3: May 15–21</option>
+        <option value="wk-Heat 4: May 22–28">Heat 4: May 22–28</option>
+        <option value="wk-Heat 5: May 29–Jun 4">Heat 5: May 29–Jun 4</option>
+        <option value="wk-Heat 6: Jun 5–11">Heat 6: Jun 5–11</option>
+        <option value="wk-Heat 7: Jun 12–18">Heat 7: Jun 12–18</option>
+        <option value="wk-Heat 8: Jun 19–25">Heat 8: Jun 19–25</option>
+        <option value="wk-Heat 9: Jun 26–Jul 2">Heat 9: Jun 26–Jul 2</option>
+        <option value="wk-Heat 10: Jul 3–9">Heat 10: Jul 3–9</option>
+        <option value="wk-Heat 11: Jul 10–16">Heat 11: Jul 10–16</option>
+        <option value="wk-Heat 12: Jul 17–23">Heat 12: Jul 17–23</option>
+        <option value="wk-Heat 13: Jul 24–31">Heat 13: Jul 24–31</option>
       </optgroup>
       <optgroup label="── 🔥 Listing Actions (Burning Flame) ──">
         <option value="cat-L-overall">Listing Actions — All season</option>
@@ -216,7 +214,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
         <option value="cat-S-July">Spark Actions — July</option>
       </optgroup>
     </select>
-    <span style="font-size:12px;color:var(--text2)">Live leaderboard · weekly filter 🚒 · category filters for monthly awards 🏆</span>
+    <span style="font-size:12px;color:var(--text2)">Live leaderboard · heat filter 🚒 · category filters for monthly awards 🏆</span>
   </div>
 
   <div class="lbh"><span>#</span><span>Agent</span><span style="text-align:right">Period</span><span style="text-align:right">Total</span></div>
@@ -229,11 +227,11 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
   <p class="sec">How it works</p>
   <ul class="rules-list">
     <li><span class="rn">1.</span>Perform approved real estate activities throughout the week to earn points.</li>
-    <li><span class="rn">2.</span>Submit once per week using the Submit tab — enter a quantity for each activity you completed. Multiple of the same activity in one week all count.</li>
-    <li><span class="rn">3.</span>One submission per agent per week. Your history loads automatically when you enter your name.</li>
-    <li><span class="rn">4.</span>Forgot a prior week? You can still submit for it — just select the correct week from the dropdown.</li>
-    <li><span class="rn">5.</span>Points tally continuously — watch your rank rise on the Heat Index.</li>
-    <li><span class="rn">6.</span>The top point earner each week gets to drive the remote-controlled firetruck around the office!</li>
+    <li><span class="rn">2.</span>Submit once per heat using the Submit tab — enter a quantity for each activity you completed. Multiple of the same activity in one heat all count.</li>
+    <li><span class="rn">3.</span>One submission per agent per heat. Your history loads automatically when you enter your name.</li>
+    <li><span class="rn">4.</span>Forgot a prior heat? You can still submit for it — just select the correct heat from the dropdown.</li>
+    <li><span class="rn">5.</span>Points tally continuously across all heats — watch your rank rise on the Heat Index.</li>
+    <li><span class="rn">6.</span>The top point earner each heat gets to drive the remote-controlled firetruck around the office!</li>
     <li><span class="rn">7.</span>Monthly category awards for each month will be presented at the following Team Meeting.</li>
     <li><span class="rn">8.</span>Overall top 3 grand prizes announced and awarded at the Team Meeting on <strong>August 11, 2026</strong>.</li>
   </ul>
@@ -243,7 +241,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <!-- POINTS -->
 <div id="tab-pts" class="panel">
   <p class="sec">How points work</p>
-  <div class="pts-note">Each activity earns points <strong>per occurrence</strong>. If you executed 3 listing agreements, enter 3 — your points calculate automatically. Bonus source points stack on top of the base activity.</div>
+  <div class="pts-note">Each activity earns points <strong>per occurrence</strong> within the heat. If you executed 3 listing agreements in one heat, enter 3 — your points calculate automatically. Bonus source points stack on top of the base activity.</div>
   <div class="pts-section">
     <div class="pts-section-title">🏠 Listing Actions</div>
     <div class="pts-card">
@@ -312,11 +310,11 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
   <div class="fg3">
     <div class="fg"><label class="fl" for="ag-name">Your name</label><input class="fi" id="ag-name" type="text" placeholder="Start typing your name..." list="agent-list" autocomplete="off" oninput="onCtx()"/></div>
     <div class="fg"><label class="fl" for="ag-month">Month</label><select class="fi" id="ag-month" onchange="onMonthChange()"><option value="">Select month...</option><option value="May">May</option><option value="June">June</option><option value="July">July</option></select></div>
-    <div class="fg"><label class="fl" for="ag-week">Week</label><select class="fi" id="ag-week" onchange="onCtx()" disabled><option value="">Select month first...</option></select></div>
+    <div class="fg"><label class="fl" for="ag-week">Heat</label><select class="fi" id="ag-week" onchange="onCtx()" disabled><option value="">Select month first...</option></select></div>
   </div>
   <div class="dup-warn" id="dup-warn"></div>
   <div id="history-area"></div>
-  <p style="font-size:13px;color:var(--text2);margin-bottom:12px">Enter a quantity for each activity completed this week. Points calculate automatically as you type.</p>
+  <p style="font-size:13px;color:var(--text2);margin-bottom:12px">Enter a quantity for each activity completed this heat. Points calculate automatically as you type.</p>
   <div id="act-form"></div>
   <div class="pts-summary">
     <span class="pts-summary-label">Total points this submission</span>
@@ -340,7 +338,11 @@ async function sbFetch(path,opts={}){
 async function loadSubs(){return sbFetch('submissions?select=*&order=created_at.asc');}
 async function insertSub(row){return sbFetch('submissions',{method:'POST',prefer:'return=minimal',body:JSON.stringify(row)});}
 
-const WEEKS={May:["May 1–7","May 8–14","May 15–21","May 22–28","May 29–31"],June:["Jun 1–7","Jun 8–14","Jun 15–21","Jun 22–28","Jun 29–30"],July:["Jul 1–7","Jul 8–14","Jul 15–21","Jul 22–28","Jul 29–31"]};
+const WEEKS={
+  May:  ["Heat 1: May 1–7","Heat 2: May 8–14","Heat 3: May 15–21","Heat 4: May 22–28"],
+  June: ["Heat 5: May 29–Jun 4","Heat 6: Jun 5–11","Heat 7: Jun 12–18","Heat 8: Jun 19–25"],
+  July: ["Heat 9: Jun 26–Jul 2","Heat 10: Jul 3–9","Heat 11: Jul 10–16","Heat 12: Jul 17–23","Heat 13: Jul 24–31"]
+};
 
 const LA=[
   {key:'ls',label:'Executed Exclusive Listing Agreement',pts:10,cat:'L'},
@@ -476,7 +478,7 @@ function buildSun(){
 // ── Prizes ────────────────────────────────────────────────────
 function buildPrizes(){
   var el=document.getElementById('prizes-content');
-  el.innerHTML='<div class="prize-section"><p class="sec">🚒 Weekly award — every week</p><div class="weekly-card"><div class="weekly-card-header"><span class="weekly-card-ico">🚒</span><div><div class="weekly-card-title">Top of the Week</div><div class="weekly-card-sub">Awarded to the highest point earner each week</div></div></div><div class="weekly-card-body"><div class="weekly-card-desc">The agent with the <strong>most points for the week</strong> earns ultimate office bragging rights — they get to drive the <strong>remote-controlled firetruck around the office</strong>. Use the weekly filter on the Heat Index to see who\'s on top!</div></div></div></div>'
+  el.innerHTML='<div class="prize-section"><p class="sec">🚒 Weekly award — every week</p><div class="weekly-card"><div class="weekly-card-header"><span class="weekly-card-ico">🚒</span><div><div class="weekly-card-title">Top of the Week</div><div class="weekly-card-sub">Awarded to the top point earner each heat</div></div></div><div class="weekly-card-body"><div class="weekly-card-desc">The agent with the <strong>most points for the heat</strong> earns ultimate office bragging rights — they get to drive the <strong>remote-controlled firetruck around the office</strong>. Use the heat filter on the Heat Index to see who\'s on top!</div></div></div></div>'
   +'<div class="prize-section"><p class="sec">🎉 Monthly awards — presented at the following Team Meeting</p><div class="ma-stack" id="ma-stack"></div><p style="font-size:12px;color:var(--text2)">Prize revealed and presented at the following month\'s Team Meeting. 🎁</p></div>'
   +'<div class="prize-section"><p class="sec">🏆 Overall grand prizes — announced August 11, 2026</p><div class="gp-stack" id="gp-stack"></div><p style="font-size:12px;color:var(--text2);margin-top:.5rem">Winners announced and prizes awarded at the Team Meeting on August 11, 2026. 🎁</p></div>';
 
@@ -667,7 +669,7 @@ function renderLB(){
   list.innerHTML=data.map(function(d,i){
     var pct=Math.round(d.total/max*100);
     var rank=i===0&&isWeek?'🚒':i<3?medals[i]:(i+1).toString();
-    var truckLabel=i===0&&isWeek?' <span style="font-size:11px;color:var(--brand2);font-weight:500">🔥 drives the truck</span>':'';
+    var truckLabel=i===0&&isWeek?' <span style="font-size:11px;color:var(--brand2);font-weight:500">🔥 drives the truck this heat</span>':'';
     return'<div class="lbr"><div class="lbr-rank" style="font-size:'+(i<3||isWeek?18:14)+'px">'+rank+'</div>'
       +'<div class="lbr-name">'+d.name+truckLabel+'</div>'
       +'<div class="lbr-mo">'+colLabel+'</div>'
@@ -678,7 +680,7 @@ function renderLB(){
 // ── Submit ────────────────────────────────────────────────────
 function onMonthChange(){
   var m=document.getElementById('ag-month').value,ws=document.getElementById('ag-week');
-  ws.innerHTML='<option value="">Select week...</option>';
+  ws.innerHTML='<option value="">Select heat...</option>';
   if(m&&WEEKS[m]){WEEKS[m].forEach(function(w){var o=document.createElement('option');o.value=w;o.textContent=w;ws.appendChild(o);});ws.disabled=false;}
   else{ws.innerHTML='<option value="">Select month first...</option>';ws.disabled=true;}
   onCtx();
@@ -690,7 +692,7 @@ async function onCtx(){
   var warn=document.getElementById('dup-warn'),area=document.getElementById('history-area');
   if(name&&month&&week){
     var dup=SUBS.find(function(s){return s.name.toLowerCase()===name.toLowerCase()&&s.month===month&&s.week===week;});
-    if(dup){warn.className='dup-warn show';warn.innerHTML='⚠️ You already submitted <strong>'+dup.pts+' pts</strong> for <strong>'+week+'</strong>. Check your history below.';}
+    if(dup){warn.className='dup-warn show';warn.innerHTML='⚠️ You already submitted <strong>'+dup.pts+' pts</strong> for <strong>'+week+'</strong>. Check your history below — one submission per heat.';}
     else warn.className='dup-warn';
   } else warn.className='dup-warn';
   if(!name||!month){area.innerHTML='';return;}
@@ -944,7 +946,7 @@ async function doSubmit(){
     document.getElementById('ag-week').value='';
     document.getElementById('dup-warn').className='dup-warn';
     onCtx();
-    showToast('✓ '+pts+' pts submitted for '+name+' — '+week+'!','ok');
+    showToast('✓ '+pts+' pts submitted for '+name+' — '+week+'. Heat recorded!','ok');
     renderLB();
   }catch(e){showToast('Submission failed — please try again.','warn');console.error(e);}
   finally{btn.disabled=false;btn.textContent='Submit points';}
