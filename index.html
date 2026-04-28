@@ -26,6 +26,18 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .hero-subtitle{font-size:15px;font-weight:500;color:#FAC775;margin-bottom:8px}
 .hero-tagline{font-size:13px;color:rgba(250,238,218,.75);font-style:italic;margin-bottom:14px}
 .hero-dates{display:inline-flex;gap:8px;align-items:center;background:rgba(0,0,0,.28);border-radius:var(--radius-sm);padding:6px 14px;font-size:13px;color:#FAC775;font-weight:500}
+.countdown-wrap{margin-top:14px}
+.countdown-banner{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,0.32);border:.5px solid rgba(250,210,100,0.35);border-radius:var(--radius-sm);padding:8px 16px;flex-wrap:wrap}
+.cd-label{font-size:12px;color:rgba(250,238,218,0.7);text-transform:uppercase;letter-spacing:.1em;font-weight:500;margin-right:4px}
+.cd-units{display:flex;gap:10px;align-items:center}
+.cd-unit{text-align:center;min-width:36px}
+.cd-num{font-size:22px;font-weight:500;color:#FAEEDA;line-height:1;display:block}
+.cd-sep{font-size:18px;font-weight:300;color:rgba(250,238,218,0.4);margin-bottom:12px}
+.cd-lbl{font-size:10px;color:rgba(250,238,218,0.5);text-transform:uppercase;letter-spacing:.08em;display:block;margin-top:2px}
+.cd-live{display:inline-flex;align-items:center;gap:6px;background:rgba(186,117,23,0.25);border:.5px solid rgba(186,117,23,0.5);border-radius:var(--radius-sm);padding:8px 16px;font-size:13px;font-weight:500;color:#FAEEDA}
+.cd-live-dot{width:8px;height:8px;background:#4ade80;border-radius:50%;animation:livePulse 1.5s ease-in-out infinite}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.cd-ended{display:inline-flex;align-items:center;gap:8px;background:rgba(153,60,29,0.2);border:.5px solid rgba(153,60,29,0.4);border-radius:var(--radius-sm);padding:8px 16px;font-size:13px;color:rgba(250,238,218,.6)}
 .sun-floor{position:relative;height:120px;margin:0 -2rem;overflow:hidden;background:linear-gradient(to top,rgba(0,0,0,0.35) 0%,transparent 100%)}
 .tabs{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap}
 .tb{padding:8px 16px;border-radius:var(--radius-sm);border:.5px solid var(--border2);background:var(--bg2);color:var(--text2);font-size:14px;cursor:pointer;font-family:inherit;transition:all .12s}
@@ -160,6 +172,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
     <div class="hero-subtitle">Quest for top market share in 2026</div>
     <div class="hero-tagline">"Who's bringing the heat this summer?"</div>
     <div class="hero-dates">📅 May 1 – July 31, 2026 &nbsp;·&nbsp; Submit points weekly</div>
+    <div class="countdown-wrap"><div id="cd-display"></div></div>
   </div>
   <div class="sun-floor" id="ff"></div>
 </div>
@@ -957,11 +970,67 @@ function showToast(msg,type){
   setTimeout(function(){t.className='toast';},6000);
 }
 
+// ── Countdown ─────────────────────────────────────────────────
+function runCountdown(){
+  var display=document.getElementById('cd-display');
+  if(!display) return;
+
+  var START=new Date('2026-05-01T00:00:00'); // competition start
+  var END  =new Date('2026-07-31T23:59:59'); // competition end
+
+  function tick(){
+    var now=new Date();
+
+    // Before competition starts
+    if(now < START){
+      var diff=START-now;
+      var d=Math.floor(diff/86400000);
+      var h=Math.floor((diff%86400000)/3600000);
+      var m=Math.floor((diff%3600000)/60000);
+      var s=Math.floor((diff%60000)/1000);
+      display.innerHTML=
+        '<div class="countdown-banner">'
+        +'<span class="cd-label">Competition starts in</span>'
+        +'<div class="cd-units">'
+        +'<div class="cd-unit"><span class="cd-num">'+String(d).padStart(2,'0')+'</span><span class="cd-lbl">Days</span></div>'
+        +'<span class="cd-sep">:</span>'
+        +'<div class="cd-unit"><span class="cd-num">'+String(h).padStart(2,'0')+'</span><span class="cd-lbl">Hrs</span></div>'
+        +'<span class="cd-sep">:</span>'
+        +'<div class="cd-unit"><span class="cd-num">'+String(m).padStart(2,'0')+'</span><span class="cd-lbl">Min</span></div>'
+        +'<span class="cd-sep">:</span>'
+        +'<div class="cd-unit"><span class="cd-num">'+String(s).padStart(2,'0')+'</span><span class="cd-lbl">Sec</span></div>'
+        +'</div></div>';
+      return;
+    }
+
+    // Competition is live
+    if(now >= START && now <= END){
+      var diff2=END-now;
+      var d2=Math.floor(diff2/86400000);
+      var h2=Math.floor((diff2%86400000)/3600000);
+      var m2=Math.floor((diff2%3600000)/60000);
+      display.innerHTML=
+        '<div class="cd-live">'
+        +'<span class="cd-live-dot"></span>'
+        +'Competition is LIVE — '+d2+'d '+h2+'h '+m2+'m remaining'
+        +'</div>';
+      return;
+    }
+
+    // Competition over
+    display.innerHTML='<div class="cd-ended">🏆 Competition ended July 31 — see you at the finale!</div>';
+  }
+
+  tick();
+  setInterval(tick, 1000);
+}
+
 (async function(){
   buildSun();
   buildPrizes();
   buildActForm();
   buildAgentList();
+  runCountdown();
   await refreshSubs();
   renderLB();
 })();
