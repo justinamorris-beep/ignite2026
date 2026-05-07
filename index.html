@@ -164,8 +164,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .toast{display:none;padding:10px 14px;border-radius:var(--radius-sm);font-size:13px;margin-top:.75rem}
 .toast.ok{display:block;background:var(--ok-bg);color:var(--ok-text);border:.5px solid var(--ok-border)}
 .toast.warn{display:block;background:var(--warn-bg);color:var(--warn-text);border:.5px solid var(--warn-border)}
-.dup-warn{display:none;background:var(--warn-bg);border:.5px solid var(--warn-border);border-radius:var(--radius-sm);padding:10px 14px;font-size:13px;color:var(--warn-text);margin-bottom:.9rem;line-height:1.5}
-.dup-warn.show{display:block}
+
 .hist-box{border:.5px solid var(--border2);border-radius:var(--radius-sm);overflow:hidden;margin-bottom:1rem}
 .hist-head{background:rgba(153,60,29,.1);padding:8px 12px;font-size:12px;font-weight:500;color:var(--brand2);display:flex;justify-content:space-between;align-items:center}
 .hist-row{display:grid;grid-template-columns:90px 70px 1fr 52px;gap:8px;padding:8px 12px;border-top:.5px solid var(--border);align-items:start}
@@ -265,8 +264,8 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
   <p class="sec">How it works</p>
   <ul class="rules-list">
     <li><span class="rn">1.</span>Perform approved real estate activities throughout the week to earn points.</li>
-    <li><span class="rn">2.</span>Submit once per heat using the Submit tab — enter a quantity for each activity you completed. Multiple of the same activity in one heat all count.</li>
-    <li><span class="rn">3.</span>One submission per agent per heat. Your history loads automatically when you enter your name.</li>
+    <li><span class="rn">2.</span>Submit as often as you like during each heat — daily, every few days, or all at once at the end. Enter quantities for activities completed since your last submission.</li>
+    <li><span class="rn">3.</span>Your full submission history for the selected month loads automatically when you enter your name, so you can always see what you've already recorded.</li>
     <li><span class="rn">4.</span>Forgot a prior heat? You can still submit for it — just select the correct heat from the dropdown.</li>
     <li><span class="rn">5.</span>Points tally continuously across all heats — watch your rank rise on the Heat Index.</li>
     <li><span class="rn">6.</span>The top point earner each heat gets to drive the remote-controlled firetruck around the office!</li>
@@ -350,9 +349,8 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
     <div class="fg"><label class="fl" for="ag-month">Month</label><select class="fi" id="ag-month" onchange="onMonthChange()"><option value="">Select month...</option><option value="May">May</option><option value="June">June</option><option value="July">July</option></select></div>
     <div class="fg"><label class="fl" for="ag-week">Heat</label><select class="fi" id="ag-week" onchange="onCtx()" disabled><option value="">Select month first...</option></select></div>
   </div>
-  <div class="dup-warn" id="dup-warn"></div>
   <div id="history-area"></div>
-  <p style="font-size:13px;color:var(--text2);margin-bottom:12px">Enter a quantity for each activity completed this heat. Points calculate automatically as you type.</p>
+  <p style="font-size:13px;color:var(--text2);margin-bottom:12px">Enter quantities for activities completed since your last submission. You can submit daily or as often as you like within a heat.</p>
   <div id="act-form"></div>
   <div class="pts-summary">
     <span class="pts-summary-label">Total points this submission</span>
@@ -727,17 +725,12 @@ function getCtx(){return{name:document.getElementById('ag-name').value.trim(),mo
 
 async function onCtx(){
   var ctx=getCtx(),name=ctx.name,month=ctx.month,week=ctx.week;
-  var warn=document.getElementById('dup-warn'),area=document.getElementById('history-area');
-  if(name&&month&&week){
-    var dup=SUBS.find(function(s){return s.name.toLowerCase()===name.toLowerCase()&&s.month===month&&s.week===week;});
-    if(dup){warn.className='dup-warn show';warn.innerHTML='⚠️ You already submitted <strong>'+dup.pts+' pts</strong> for <strong>'+week+'</strong>. Check your history below — one submission per heat.';}
-    else warn.className='dup-warn';
-  } else warn.className='dup-warn';
+  var area=document.getElementById('history-area');
   if(!name||!month){area.innerHTML='';return;}
   var p=SUBS.filter(function(s){return s.name.toLowerCase()===name.toLowerCase()&&s.month===month;});
   var tot=p.reduce(function(x,s){return x+s.pts;},0);
   if(!p.length){area.innerHTML='<div class="hist-box"><div class="hist-head"><span>Your submissions — '+month+'</span><span style="color:var(--text2);font-weight:400">No entries yet</span></div><div class="hist-none">Nothing recorded for '+month+' yet — you\'re all clear!</div></div>';return;}
-  area.innerHTML='<div class="hist-box"><div class="hist-head"><span>Your submissions — '+month+'</span><span>'+tot+' pts total</span></div>'+p.map(function(s){return'<div class="hist-row"><span class="hist-date">'+new Date(s.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric'})+'</span><span class="hist-week">'+s.week+'</span><span class="hist-acts">'+s.act_labels+'</span><span class="hist-pts">+'+s.pts+'</span></div>';}).join('')+'</div>';
+  area.innerHTML='<div class="hist-box"><div class="hist-head"><span>Your submissions — '+month+'</span><span style="color:var(--brand)">'+tot+' pts this month</span></div>'+p.map(function(s){return'<div class="hist-row"><span class="hist-date">'+new Date(s.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric'})+'</span><span class="hist-week">'+s.week+'</span><span class="hist-acts">'+s.act_labels+'</span><span class="hist-pts">+'+s.pts+'</span></div>';}).join('')+'</div>';
 }
 
 // ── Agent roster — add all agent names here ───────────────────
@@ -981,10 +974,9 @@ async function doSubmit(){
     await refreshSubs();
     ALL.forEach(function(a){var inp=document.getElementById('qty-'+a.key);if(inp)inp.value='';});
     updTotal();
-    document.getElementById('ag-week').value='';
-    document.getElementById('dup-warn').className='dup-warn';
+    // keep heat selected for easy daily re-submission
     onCtx();
-    showToast('✓ '+pts+' pts submitted for '+name+' — '+week+'. Heat recorded!','ok');
+    showToast('✓ '+pts+' pts added for '+name+' — '+week+'. Keep the heat going!','ok');
     renderLB();
   }catch(e){showToast('Submission failed — please try again.','warn');console.error(e);}
   finally{btn.disabled=false;btn.textContent='Submit points';}
